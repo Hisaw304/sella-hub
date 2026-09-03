@@ -27,6 +27,7 @@ import Plans from "./pages/Plans";
 import Checkout from "./pages/Checkout";
 import BrowseListings from "./pages/BrowseListings";
 import Categories from "./pages/Categories";
+import SellerProfile from "./pages/SellerProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLayout from "./pages/admin/AdminLayout";
 
@@ -74,6 +75,8 @@ const App = () => {
           {/* Public Marketplace */}
           <Route path="/browse" element={<BrowseListings />} />
           <Route path="/categories" element={<Categories />} />
+
+          <Route path="/seller/:id" element={<SellerProfile />} />
 
           {/* Admin */}
           <Route path="/admin" element={<AdminLayout />}>

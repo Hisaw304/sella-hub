@@ -7623,3 +7623,862 @@ body {
     font-size: 26px;
   }
 }
+/* =========================================================
+   SELLER PROFILE PAGE
+========================================================= */
+
+.sh-seller-page {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--sh-body);
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  padding: 40px 20px 90px;
+}
+
+.sh-seller-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.sh-seller-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 28px;
+
+  color: var(--sh-text-muted);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.sh-seller-back:hover {
+  color: var(--sh-text);
+}
+
+/* =========================================================
+   SELLER HERO
+========================================================= */
+
+.sh-seller-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+
+  padding: 34px;
+
+  background: var(--sh-surface);
+
+  border: 1px solid rgba(37, 41, 31, 0.08);
+  border-radius: 24px;
+
+  box-shadow: 0 12px 40px rgba(37, 41, 31, 0.05);
+}
+
+/* =========================================================
+   SELLER IDENTITY
+========================================================= */
+
+.sh-seller-identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+.sh-seller-large-avatar {
+  width: 92px;
+  height: 92px;
+  flex: 0 0 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #eee9dc;
+
+  border-radius: 50%;
+
+  color: var(--sh-secondary);
+}
+
+.sh-seller-large-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   SELLER DETAILS
+========================================================= */
+
+.sh-seller-details {
+  min-width: 0;
+}
+
+.sh-seller-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sh-seller-name-row h1 {
+  margin: 0;
+
+  font-family: var(--sh-font-display);
+
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1;
+
+  color: var(--sh-text);
+}
+
+.sh-seller-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sh-seller-owner {
+  margin: 8px 0 0;
+
+  color: var(--sh-text-muted);
+
+  font-size: 14px;
+}
+
+.sh-seller-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+
+  margin-top: 14px;
+}
+
+.sh-seller-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 13px;
+}
+
+.sh-seller-info svg {
+  color: var(--sh-accent);
+}
+
+/* =========================================================
+   SELLER ACTIONS
+========================================================= */
+
+.sh-seller-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.sh-seller-share,
+.sh-seller-contact {
+  height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 0 17px;
+
+  border-radius: 10px;
+
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sh-seller-share {
+  background: transparent;
+
+  border: 1px solid rgba(37, 41, 31, 0.12);
+
+  color: var(--sh-text);
+}
+
+.sh-seller-share:hover {
+  background: var(--sh-body);
+}
+
+.sh-seller-contact {
+  border: 1px solid var(--sh-primary);
+
+  background: var(--sh-primary);
+
+  color: #fff;
+}
+
+.sh-seller-contact:hover {
+  background: var(--sh-secondary);
+  border-color: var(--sh-secondary);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   SELLER STATS
+========================================================= */
+
+.sh-seller-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-top: 18px;
+
+  background: var(--sh-surface);
+
+  border: 1px solid rgba(37, 41, 31, 0.08);
+  border-radius: 18px;
+
+  overflow: hidden;
+}
+
+.sh-seller-stat {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 22px 25px;
+
+  border-right: 1px solid rgba(37, 41, 31, 0.08);
+}
+
+.sh-seller-stat:last-child {
+  border-right: none;
+}
+
+.sh-seller-stat > svg {
+  width: 20px;
+  height: 20px;
+
+  color: var(--sh-accent);
+}
+
+.sh-seller-stat div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sh-seller-stat strong {
+  color: var(--sh-text);
+
+  font-size: 15px;
+  font-weight: 650;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sh-seller-stat span {
+  color: var(--sh-text-muted);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   LISTINGS SECTION
+========================================================= */
+
+.sh-seller-listings {
+  margin-top: 75px;
+}
+
+.sh-seller-listings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 28px;
+}
+
+.sh-seller-listings-header > div {
+  max-width: 650px;
+}
+
+.sh-seller-listings-header .sh-section-label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--sh-accent);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sh-seller-listings-header h2 {
+  margin: 0;
+
+  font-family: var(--sh-font-display);
+
+  font-size: clamp(32px, 4vw, 45px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.sh-seller-listings-header h2 span {
+  color: var(--sh-accent);
+}
+
+.sh-seller-listings-header p {
+  margin: 13px 0 0;
+
+  color: var(--sh-text-muted);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   LISTINGS GRID
+========================================================= */
+
+.sh-seller-listings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* =========================================================
+   LISTING CARD
+========================================================= */
+
+.sh-seller-listing-card {
+  min-width: 0;
+
+  background: var(--sh-surface);
+
+  border: 1px solid rgba(37, 41, 31, 0.08);
+  border-radius: 17px;
+
+  overflow: hidden;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sh-seller-listing-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 16px 35px rgba(37, 41, 31, 0.08);
+}
+
+/* =========================================================
+   LISTING IMAGE
+========================================================= */
+
+.sh-seller-listing-image {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 1 / 0.82;
+
+  overflow: hidden;
+
+  background: #eee9dc;
+
+  text-decoration: none;
+}
+
+.sh-seller-listing-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
+}
+
+.sh-seller-listing-card:hover .sh-seller-listing-image img {
+  transform: scale(1.04);
+}
+
+.sh-seller-listing-image > span {
+  position: absolute;
+
+  left: 11px;
+  top: 11px;
+
+  padding: 6px 9px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border-radius: 7px;
+
+  color: var(--sh-text);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.sh-seller-listing-no-image {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--sh-text-muted);
+}
+
+/* =========================================================
+   LISTING CONTENT
+========================================================= */
+
+.sh-seller-listing-content {
+  padding: 17px;
+}
+
+.sh-seller-listing-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sh-seller-listing-title h3 {
+  margin: 0;
+
+  color: var(--sh-text);
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+.sh-seller-listing-title svg {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  color: var(--sh-text-muted);
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sh-seller-listing-card:hover .sh-seller-listing-title svg {
+  color: var(--sh-accent);
+  transform: translate(2px, -2px);
+}
+
+.sh-seller-listing-price {
+  margin: 10px 0 0;
+
+  color: var(--sh-accent);
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sh-seller-listing-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 12px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 12px;
+}
+
+.sh-seller-listing-location svg {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.sh-seller-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  padding: 45px 25px;
+
+  background: var(--sh-surface);
+
+  border: 1px solid rgba(37, 41, 31, 0.08);
+  border-radius: 20px;
+
+  text-align: center;
+}
+
+.sh-seller-empty-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  background: rgba(176, 122, 74, 0.1);
+
+  border-radius: 50%;
+
+  color: var(--sh-accent);
+}
+
+.sh-seller-empty h3 {
+  margin: 0;
+
+  font-size: 17px;
+}
+
+.sh-seller-empty p {
+  max-width: 400px;
+
+  margin: 8px 0 0;
+
+  color: var(--sh-text-muted);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.sh-seller-loading {
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 14px;
+}
+
+.sh-seller-spinner {
+  animation: sh-seller-spin 0.9s linear infinite;
+}
+
+@keyframes sh-seller-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sh-seller-error {
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.sh-seller-error-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  background: rgba(176, 122, 74, 0.1);
+
+  border-radius: 50%;
+
+  color: var(--sh-accent);
+}
+
+.sh-seller-error h2 {
+  margin: 0;
+
+  font-family: var(--sh-font-display);
+
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.sh-seller-error p {
+  margin: 8px 0 22px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 14px;
+}
+
+.sh-seller-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 11px 16px;
+
+  background: var(--sh-primary);
+  color: #fff;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .sh-seller-hero {
+    padding: 28px;
+  }
+
+  .sh-seller-large-avatar {
+    width: 78px;
+    height: 78px;
+    flex-basis: 78px;
+  }
+
+  .sh-seller-listings-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .sh-seller-page {
+    padding: 30px 15px 60px;
+  }
+
+  .sh-seller-back {
+    margin-bottom: 20px;
+  }
+
+  .sh-seller-hero {
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 24px 20px;
+
+    border-radius: 18px;
+  }
+
+  .sh-seller-identity {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .sh-seller-large-avatar {
+    width: 68px;
+    height: 68px;
+    flex-basis: 68px;
+  }
+
+  .sh-seller-name-row h1 {
+    font-size: 31px;
+  }
+
+  .sh-seller-info {
+    gap: 8px 14px;
+  }
+
+  .sh-seller-actions {
+    width: 100%;
+  }
+
+  .sh-seller-share,
+  .sh-seller-contact {
+    flex: 1;
+  }
+
+  /* STATS */
+
+  .sh-seller-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .sh-seller-stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(37, 41, 31, 0.08);
+  }
+
+  .sh-seller-stat:last-child {
+    border-bottom: none;
+  }
+
+  /* LISTINGS */
+
+  .sh-seller-listings {
+    margin-top: 55px;
+  }
+
+  .sh-seller-listings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .sh-seller-listing-content {
+    padding: 13px;
+  }
+
+  .sh-seller-listing-title h3 {
+    font-size: 13px;
+  }
+
+  .sh-seller-listing-price {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 430px) {
+  .sh-seller-identity {
+    align-items: center;
+  }
+
+  .sh-seller-large-avatar {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .sh-seller-name-row {
+    gap: 6px;
+  }
+
+  .sh-seller-name-row h1 {
+    font-size: 26px;
+  }
+
+  .sh-seller-badge {
+    padding: 4px 7px;
+    font-size: 10px;
+  }
+
+  .sh-seller-owner {
+    font-size: 12px;
+  }
+
+  .sh-seller-info {
+    margin-top: 9px;
+  }
+
+  .sh-seller-info span {
+    font-size: 11px;
+  }
+
+  .sh-seller-actions {
+    gap: 7px;
+  }
+
+  .sh-seller-share,
+  .sh-seller-contact {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .sh-seller-listings-header h2 {
+    font-size: 31px;
+  }
+
+  .sh-seller-listings-header p {
+    font-size: 13px;
+  }
+
+  .sh-seller-listings-grid {
+    gap: 10px;
+  }
+
+  .sh-seller-listing-content {
+    padding: 11px;
+  }
+
+  .sh-seller-listing-title h3 {
+    font-size: 12px;
+  }
+
+  .sh-seller-listing-price {
+    margin-top: 7px;
+    font-size: 13px;
+  }
+
+  .sh-seller-listing-location {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+}

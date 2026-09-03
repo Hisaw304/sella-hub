@@ -111,6 +111,7 @@ const ListingDetails = () => {
       avatar_url,
       phone,
       location,
+      seller_status,
       created_at
     `
             )
@@ -704,7 +705,7 @@ const ListingDetails = () => {
               <div>
                 <h3>{sellerName}</h3>
 
-                {listing.profiles?.is_verified && (
+                {listing.profiles?.seller_status === "verified" && (
                   <span className="sh-seller-verified">
                     <CheckCircle2 size={13} />
                     Verified business
@@ -742,7 +743,7 @@ const ListingDetails = () => {
             </button>
 
             <Link
-              to={`/seller/${listing.user_id}`}
+              to={`/seller/${listing.user_id}?from=${listing.slug}`}
               className="sh-seller-profile-link"
             >
               View seller profile
