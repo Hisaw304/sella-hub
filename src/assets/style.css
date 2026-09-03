@@ -8482,3 +8482,439 @@ body {
     font-size: 10px;
   }
 }
+/* ========================================
+   REPORT MODAL
+======================================== */
+
+.sh-report-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(37, 41, 31, 0.48);
+  backdrop-filter: blur(5px);
+
+  overflow-y: auto;
+}
+
+.sh-report-modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 560px;
+
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+
+  background: var(--sh-surface);
+
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 20px;
+
+  box-shadow: 0 24px 70px rgba(37, 41, 31, 0.18);
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.sh-report-header {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+
+  padding: 24px 24px 20px;
+
+  border-bottom: 1px solid rgba(49, 55, 43, 0.08);
+}
+
+.sh-report-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--sh-accent);
+
+  background: rgba(176, 122, 74, 0.1);
+
+  border-radius: 12px;
+}
+
+.sh-report-header h2 {
+  margin: 2px 0 4px;
+
+  color: var(--sh-text);
+
+  font-family: var(--sh-font-display);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.sh-report-header p {
+  margin: 0;
+
+  color: var(--sh-text-muted);
+
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sh-report-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--sh-text-muted);
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.sh-report-close:hover {
+  background: var(--sh-body);
+  color: var(--sh-text);
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+.sh-report-body {
+  padding: 22px 24px;
+}
+
+.sh-report-field {
+  margin-bottom: 22px;
+}
+
+.sh-report-field:last-child {
+  margin-bottom: 0;
+}
+
+.sh-report-field > label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+
+  color: var(--sh-text);
+
+  font-family: var(--sh-font-body);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sh-report-field > label span {
+  color: var(--sh-text-muted);
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* ========================================
+   REPORT OPTIONS
+======================================== */
+
+.sh-report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sh-report-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 13px 14px;
+
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 12px;
+
+  background: var(--sh-surface);
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.sh-report-option:hover {
+  border-color: rgba(176, 122, 74, 0.45);
+  background: rgba(176, 122, 74, 0.035);
+}
+
+.sh-report-option:has(input:checked) {
+  border-color: var(--sh-accent);
+  background: rgba(176, 122, 74, 0.07);
+}
+
+.sh-report-option input {
+  width: 16px;
+  height: 16px;
+
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  accent-color: var(--sh-accent);
+
+  cursor: pointer;
+}
+
+.sh-report-option span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sh-report-option strong {
+  color: var(--sh-text);
+
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sh-report-option small {
+  color: var(--sh-text-muted);
+
+  font-family: var(--sh-font-body);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+.sh-report-field textarea,
+.sh-report-field input[type="email"] {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 13px;
+
+  border: 1px solid rgba(49, 55, 43, 0.13);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: var(--sh-body);
+
+  color: var(--sh-text);
+
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+
+  transition: 0.2s ease;
+}
+
+.sh-report-field textarea {
+  resize: vertical;
+  min-height: 105px;
+}
+
+.sh-report-field textarea::placeholder,
+.sh-report-field input::placeholder {
+  color: #9a9d94;
+}
+
+.sh-report-field textarea:focus,
+.sh-report-field input[type="email"]:focus {
+  border-color: var(--sh-accent);
+
+  background: var(--sh-surface);
+
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.08);
+}
+
+.sh-report-help {
+  display: block;
+
+  margin-top: 7px;
+
+  color: var(--sh-text-muted);
+
+  font-family: var(--sh-font-body);
+  font-size: 11px;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.sh-report-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  padding: 17px 24px;
+
+  border-top: 1px solid rgba(49, 55, 43, 0.08);
+}
+
+.sh-report-cancel,
+.sh-report-submit {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 17px;
+
+  border-radius: 9px;
+
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.sh-report-cancel {
+  border: 1px solid rgba(49, 55, 43, 0.12);
+
+  background: var(--sh-surface);
+
+  color: var(--sh-text);
+}
+
+.sh-report-cancel:hover {
+  background: var(--sh-body);
+}
+
+.sh-report-submit {
+  border: 1px solid var(--sh-primary);
+
+  background: var(--sh-primary);
+
+  color: #fff;
+}
+
+.sh-report-submit:hover:not(:disabled) {
+  background: var(--sh-secondary);
+  border-color: var(--sh-secondary);
+}
+
+.sh-report-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .sh-report-overlay {
+    align-items: flex-end;
+
+    padding: 0;
+  }
+
+  .sh-report-modal {
+    max-height: 92vh;
+
+    border-radius: 20px 20px 0 0;
+  }
+
+  .sh-report-header {
+    padding: 20px;
+  }
+
+  .sh-report-body {
+    padding: 20px;
+  }
+
+  .sh-report-footer {
+    padding: 14px 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sh-report-cancel,
+  .sh-report-submit {
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .sh-report-overlay {
+    align-items: center;
+    padding: 16px;
+  }
+
+  .sh-report-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 32px);
+
+    border-radius: 18px;
+  }
+
+  .sh-report-header {
+    padding: 18px;
+    padding-right: 50px;
+  }
+
+  .sh-report-header h2 {
+    font-size: 24px;
+  }
+
+  .sh-report-body {
+    padding: 18px;
+  }
+
+  .sh-report-option {
+    padding: 11px 12px;
+  }
+
+  .sh-report-footer {
+    padding: 14px 18px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sh-report-cancel,
+  .sh-report-submit {
+    width: 100%;
+  }
+}

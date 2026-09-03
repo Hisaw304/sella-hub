@@ -34,6 +34,10 @@ const ListingDetails = () => {
 
   const [saved, setSaved] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportReason, setReportReason] = useState("");
+  const [reportDescription, setReportDescription] = useState("");
+  const [reportEmail, setReportEmail] = useState("");
 
   /*
   ========================================
@@ -750,10 +754,218 @@ const ListingDetails = () => {
               <ArrowRight size={14} />
             </Link>
 
-            <button type="button" className="sh-listing-report">
+            <button
+              type="button"
+              className="sh-listing-report"
+              onClick={() => setShowReportModal(true)}
+            >
               <Flag size={14} />
               Report this listing
             </button>
+
+            {showReportModal && (
+              <div
+                className="sh-report-overlay"
+                onClick={() => setShowReportModal(false)}
+              >
+                <div
+                  className="sh-report-modal"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* HEADER */}
+
+                  <div className="sh-report-header">
+                    <div className="sh-report-icon">
+                      <Flag size={20} />
+                    </div>
+
+                    <div>
+                      <h2>Report this listing</h2>
+                      <p>Let us know what's wrong with this listing.</p>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="sh-report-close"
+                      onClick={() => setShowReportModal(false)}
+                      aria-label="Close report form"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  {/* FORM */}
+
+                  <div className="sh-report-body">
+                    <div className="sh-report-field">
+                      <label>Why are you reporting this listing?</label>
+
+                      <div className="sh-report-options">
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="scam"
+                            checked={reportReason === "scam"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Scam or fraud</strong>
+                            <small>
+                              The listing appears fraudulent or suspicious.
+                            </small>
+                          </span>
+                        </label>
+
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="misleading"
+                            checked={reportReason === "misleading"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Fake or misleading listing</strong>
+                            <small>
+                              The information or images don't seem accurate.
+                            </small>
+                          </span>
+                        </label>
+
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="prohibited"
+                            checked={reportReason === "prohibited"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Prohibited item</strong>
+                            <small>
+                              The listing appears to violate marketplace rules.
+                            </small>
+                          </span>
+                        </label>
+
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="wrong_information"
+                            checked={reportReason === "wrong_information"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Wrong information</strong>
+                            <small>
+                              The price, location, description, or other details
+                              are incorrect.
+                            </small>
+                          </span>
+                        </label>
+
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="duplicate"
+                            checked={reportReason === "duplicate"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Duplicate listing</strong>
+                            <small>
+                              This listing appears to be posted more than once.
+                            </small>
+                          </span>
+                        </label>
+
+                        <label className="sh-report-option">
+                          <input
+                            type="radio"
+                            name="report_reason"
+                            value="other"
+                            checked={reportReason === "other"}
+                            onChange={(e) => setReportReason(e.target.value)}
+                          />
+
+                          <span>
+                            <strong>Other</strong>
+                            <small>Something else doesn't look right.</small>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* DESCRIPTION */}
+
+                    <div className="sh-report-field">
+                      <label htmlFor="report-description">
+                        Additional details
+                        <span>Optional</span>
+                      </label>
+
+                      <textarea
+                        id="report-description"
+                        value={reportDescription}
+                        onChange={(e) => setReportDescription(e.target.value)}
+                        placeholder="Tell us more about the problem..."
+                        rows={4}
+                      />
+                    </div>
+
+                    {/* EMAIL */}
+
+                    <div className="sh-report-field">
+                      <label htmlFor="report-email">
+                        Email address
+                        <span>Optional</span>
+                      </label>
+
+                      <input
+                        id="report-email"
+                        type="email"
+                        value={reportEmail}
+                        onChange={(e) => setReportEmail(e.target.value)}
+                        placeholder="you@example.com"
+                      />
+
+                      <small className="sh-report-help">
+                        Leave your email if you'd like us to follow up with you.
+                      </small>
+                    </div>
+                  </div>
+
+                  {/* FOOTER */}
+
+                  <div className="sh-report-footer">
+                    <button
+                      type="button"
+                      className="sh-report-cancel"
+                      onClick={() => setShowReportModal(false)}
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      type="button"
+                      className="sh-report-submit"
+                      disabled={!reportReason}
+                    >
+                      <Flag size={15} />
+                      Submit report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </aside>
         </section>
 
