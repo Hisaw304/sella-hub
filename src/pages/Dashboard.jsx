@@ -471,12 +471,25 @@ export default function Dashboard() {
               <div>
                 <span>
                   {userPlan
-                    ? `${
+                    ? `${Math.max(
+                        0,
                         userPlan.listings_allowed - userPlan.listings_used
-                      } listings remaining`
+                      )} listings remaining`
                     : "Choose a plan"}
                 </span>
+
                 <strong>{userPlan?.pricing_plans?.name || "No plan"}</strong>
+
+                {userPlan?.expired_at && (
+                  <small className="sh-dashboard-plan-expiry">
+                    Expires{" "}
+                    {new Date(userPlan.expired_at).toLocaleDateString("en-NG", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </small>
+                )}
               </div>
             </div>
           </div>
