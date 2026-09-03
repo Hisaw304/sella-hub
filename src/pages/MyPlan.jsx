@@ -171,7 +171,12 @@ export default function MyPlan() {
           published,
         });
       } catch (err) {
-        console.error("My plan error:", err);
+        console.error("My plan error:", {
+          message: err?.message,
+          details: err?.details,
+          hint: err?.hint,
+          code: err?.code,
+        });
 
         setError(err?.message || "Unable to load your current plan.");
       } finally {

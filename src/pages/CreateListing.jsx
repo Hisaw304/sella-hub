@@ -302,6 +302,29 @@ GET USER LISTING COUNT
       return;
     }
 
+    /*
+========================================
+CHECK PLAN EXPIRATION
+========================================
+*/
+
+    if (
+      userPlan.status !== "active" ||
+      !userPlan.expired_at ||
+      new Date(userPlan.expired_at) <= new Date()
+    ) {
+      setError(
+        "Your pricing plan has expired. Please choose a plan before creating a listing."
+      );
+      return;
+    }
+
+    /*
+========================================
+CHECK LISTING LIMIT
+========================================
+*/
+
     const remainingListings =
       userPlan.listings_allowed - userPlan.listings_used;
 
@@ -525,7 +548,13 @@ GET USER LISTING COUNT
           <div>
             <span>Current plan</span>
 
-            <strong>{userPlan?.pricing_plans?.name || "No active plan"}</strong>
+            <strong>
+              {userPlan?.status === "active" &&
+              userPlan?.expired_at &&
+              new Date(userPlan.expired_at) > new Date()
+                ? userPlan.pricing_plans?.name
+                : "No active plan"}
+            </strong>
           </div>
 
           <div className="sh-create-listing-plan-stat">

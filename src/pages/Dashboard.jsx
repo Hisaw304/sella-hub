@@ -223,17 +223,18 @@ export default function Dashboard() {
         .from("user_plans")
         .select(
           `
-    *,
-    pricing_plans (
-      name,
-      price,
-      max_listings,
-      max_images
-    )
-  `
+      *,
+      pricing_plans (
+        name,
+        price,
+        max_listings,
+        max_images
+      )
+    `
         )
         .eq("user_id", user.id)
         .eq("status", "active")
+        .gt("expired_at", new Date().toISOString())
         .order("created_at", {
           ascending: false,
         })
@@ -469,26 +470,54 @@ export default function Dashboard() {
               </div>
 
               <div>
-                <span>
-                  {userPlan
-                    ? `${Math.max(
+                {userPlan?.status === "active" ? (
+                  <>
+                    <span>
+                      {Math.max(
                         0,
-                        userPlan.listings_allowed - userPlan.listings_used
-                      )} listings remaining`
-                    : "Choose a plan"}
-                </span>
+                        userPlan.listings_allowed - stats.totalListings
+                      )}{" "}
+                      listings remaining
+                    </span>
 
-                <strong>{userPlan?.pricing_plans?.name || "No plan"}</strong>
+                    <strong>
+                      {userPlan?.pricing_plans?.name || "No plan"}
+                    </strong>
 
-                {userPlan?.expired_at && (
-                  <small className="sh-dashboard-plan-expiry">
-                    Expires{" "}
-                    {new Date(userPlan.expired_at).toLocaleDateString("en-NG", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}
-                  </small>
+                    {userPlan.expired_at && (
+                      <small className="sh-dashboard-plan-expiry">
+                        Expires{" "}
+                        {new Date(userPlan.expired_at).toLocaleDateString(
+                          "en-NG",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </small>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <span>Plan expired</span>
+
+                    <strong>Choose a plan</strong>
+
+                    {userPlan?.expired_at && (
+                      <small className="sh-dashboard-plan-expiry">
+                        Expired{" "}
+                        {new Date(userPlan.expired_at).toLocaleDateString(
+                          "en-NG",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </small>
+                    )}
+                  </>
                 )}
               </div>
             </div>
