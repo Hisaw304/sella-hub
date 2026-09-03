@@ -32,6 +32,7 @@ const CreateListing = () => {
   const [success, setSuccess] = useState("");
 
   const [images, setImages] = useState([]);
+  const [listingCount, setListingCount] = useState(0);
 
   const [formData, setFormData] = useState({
     listingType: "product",
@@ -73,23 +74,23 @@ const CreateListing = () => {
         setUser(user);
 
         /*
-        ========================================
-        GET ACTIVE PLAN
-        ========================================
-        */
+========================================
+GET ACTIVE PLAN
+========================================
+*/
 
         const { data: planData, error: planError } = await supabase
           .from("user_plans")
           .select(
             `
-            *,
-            pricing_plans (
-              id,
-              name,
-              max_listings,
-              max_images
-            )
-          `
+    *,
+    pricing_plans (
+      id,
+      name,
+      max_listings,
+      max_images
+    )
+  `
           )
           .eq("user_id", user.id)
           .eq("status", "active")
@@ -105,6 +106,25 @@ const CreateListing = () => {
 
         setUserPlan(planData);
 
+        /*
+========================================
+GET USER LISTING COUNT
+========================================
+*/
+
+        const { count, error: listingCountError } = await supabase
+          .from("listings")
+          .select("id", {
+            count: "exact",
+            head: true,
+          })
+          .eq("user_id", user.id);
+
+        if (listingCountError) {
+          throw listingCountError;
+        }
+
+        setListingCount(count || 0);
         /*
         ========================================
         GET CATEGORIES
@@ -461,7 +481,7 @@ const CreateListing = () => {
   }
 
   const remainingListings = userPlan
-    ? userPlan.listings_allowed - userPlan.listings_used
+    ? Math.max(0, userPlan.listings_allowed - listingCount)
     : 0;
 
   const maxImages = userPlan?.pricing_plans?.max_images || 0;
