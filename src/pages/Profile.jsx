@@ -191,9 +191,6 @@ export default function Profile() {
       session.user.id
     }/avatar-${crypto.randomUUID()}.${extension}`;
 
-    console.log("Avatar upload user:", session.user.id);
-    console.log("Avatar upload path:", fileName);
-
     const { error: uploadError } = await supabase.storage
       .from("avatars")
       .upload(fileName, avatarFile, {

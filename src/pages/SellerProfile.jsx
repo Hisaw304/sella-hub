@@ -31,8 +31,6 @@ const SellerProfile = () => {
   const [searchParams] = useSearchParams();
 
   const listingSlug = searchParams.get("from");
-  console.log("SELLER PAGE URL:", window.location.href);
-  console.log("LISTING SLUG:", listingSlug);
 
   /*
   ========================================

@@ -47,9 +47,6 @@ const Login = () => {
         throw profileError;
       }
 
-      console.log("Logged in user:", user);
-      console.log("User profile:", profile);
-
       // REDIRECT BASED ON ROLE
       if (profile?.role === "admin") {
         window.location.href = "/admin";
