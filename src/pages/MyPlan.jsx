@@ -72,11 +72,17 @@ export default function MyPlan() {
           .from("user_plans")
           .select(
             `
-    *,
-    pricing_plans (*)
-  `
+      *,
+      pricing_plans (*)
+    `
           )
           .eq("user_id", user.id)
+          .eq("status", "active")
+          .gt("expired_at", new Date().toISOString())
+          .order("created_at", {
+            ascending: false,
+          })
+          .limit(1)
           .maybeSingle();
 
         if (planError) {

@@ -30,6 +30,7 @@ import Categories from "./pages/Categories";
 import SellerProfile from "./pages/SellerProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLayout from "./pages/admin/AdminLayout";
+import Notifications from "./pages/Notifications";
 
 const App = () => {
   const location = useLocation();
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="/dashboard/plan" element={<MyPlan />} />
           <Route path="/dashboard/payments" element={<Payment />} />
           <Route path="/dashboard/plans" element={<Plans />} />
+          <Route path="/dashboard/notifications" element={<Notifications />} />
           <Route path="/dashboard/checkout/:planId" element={<Checkout />} />
 
           {/* Public Listing */}

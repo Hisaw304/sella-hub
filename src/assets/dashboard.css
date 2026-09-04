@@ -538,6 +538,20 @@
   width: 100%;
 }
 
+.sh-listing-hidden-message {
+  display: block;
+  margin-top: 4px;
+  color: var(--sh-accent);
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.sh-status-expired {
+  background: #f6ede5;
+  color: var(--sh-accent);
+}
+
 /* ========================================
    RECENT LISTING ITEM
 ======================================== */
@@ -2250,6 +2264,12 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.sh-status-badge.expired {
+  background: #f6ede5;
+  color: var(--sh-accent);
+  border-color: #ead8c7;
 }
 
 /* =========================================================
@@ -9564,5 +9584,483 @@
     min-height: 350px;
 
     padding: 30px 20px;
+  }
+}
+/* =========================================================
+   SELLER NOTIFICATIONS
+========================================================= */
+
+.sh-notifications-page {
+  min-height: 100vh;
+  padding: 32px 20px 70px;
+  background: var(--sh-body);
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+}
+
+.sh-notifications-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.sh-notifications-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.sh-notifications-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 18px;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sh-notifications-back:hover {
+  color: var(--sh-accent);
+}
+
+.sh-notifications-title-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.sh-notifications-title-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-notifications-title-row h1 {
+  margin: 0 0 4px;
+  color: var(--sh-text);
+  font-family: var(--sh-font-display);
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.sh-notifications-title-row p {
+  margin: 0;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   MARK ALL
+========================================================= */
+
+.sh-notifications-mark-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(49, 55, 43, 0.12);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  color: var(--sh-secondary);
+  font-family: var(--sh-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.sh-notifications-mark-all:hover {
+  border-color: rgba(176, 122, 74, 0.35);
+  background: rgba(176, 122, 74, 0.05);
+  color: var(--sh-accent);
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.sh-notifications-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+  padding: 4px;
+  width: fit-content;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 10px;
+  background: var(--sh-surface);
+}
+
+.sh-notifications-tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  font-family: var(--sh-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sh-notifications-tabs button:hover {
+  color: var(--sh-primary);
+}
+
+.sh-notifications-tabs button.active {
+  background: rgba(176, 122, 74, 0.11);
+  color: var(--sh-accent);
+}
+
+.sh-notifications-tabs button span {
+  min-width: 19px;
+  height: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 20px;
+  background: var(--sh-primary);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.sh-notifications-card {
+  overflow: hidden;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 14px;
+  background: var(--sh-surface);
+  box-shadow: 0 4px 18px rgba(49, 55, 43, 0.045);
+}
+
+/* =========================================================
+   NOTIFICATION LIST
+========================================================= */
+
+.sh-notifications-list {
+  width: 100%;
+}
+
+.sh-notification-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 17px 18px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.07);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sh-notification-item:last-child {
+  border-bottom: 0;
+}
+
+.sh-notification-item:hover {
+  background: rgba(176, 122, 74, 0.035);
+}
+
+.sh-notification-item.is-unread {
+  background: rgba(176, 122, 74, 0.055);
+}
+
+.sh-notification-item.is-unread:hover {
+  background: rgba(176, 122, 74, 0.08);
+}
+
+/* =========================================================
+   NOTIFICATION ICON
+========================================================= */
+
+.sh-notification-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(49, 55, 43, 0.07);
+  color: var(--sh-secondary);
+}
+
+.sh-notification-icon.success {
+  background: rgba(107, 112, 92, 0.13);
+  color: var(--sh-secondary);
+}
+
+.sh-notification-icon.warning {
+  background: rgba(176, 122, 74, 0.12);
+  color: var(--sh-accent);
+}
+
+.sh-notification-icon.danger {
+  background: rgba(176, 122, 74, 0.12);
+  color: #a85d3c;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.sh-notification-content {
+  min-width: 0;
+  flex: 1;
+  padding-right: 25px;
+}
+
+.sh-notification-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sh-notification-top h3 {
+  margin: 0;
+  color: var(--sh-text);
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.sh-notification-item.is-read .sh-notification-top h3 {
+  font-weight: 600;
+}
+
+.sh-notification-content p {
+  margin: 4px 0 6px;
+  max-width: 680px;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sh-notification-time {
+  display: block;
+  color: rgba(115, 119, 108, 0.75);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   UNREAD DOT
+========================================================= */
+
+.sh-notification-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--sh-accent);
+}
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.sh-notification-delete {
+  position: absolute;
+  top: 17px;
+  right: 16px;
+  width: 29px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(115, 119, 108, 0.65);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.sh-notification-item:hover .sh-notification-delete {
+  opacity: 1;
+}
+
+.sh-notification-delete:hover {
+  background: rgba(176, 122, 74, 0.09);
+  color: #a85d3c;
+}
+
+/* =========================================================
+   EMPTY / LOADING / ERROR
+========================================================= */
+
+.sh-notifications-empty {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.sh-notifications-empty-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-radius: 13px;
+  background: rgba(49, 55, 43, 0.07);
+  color: var(--sh-secondary);
+}
+
+.sh-notifications-empty h3 {
+  margin: 0 0 6px;
+  color: var(--sh-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sh-notifications-empty p {
+  max-width: 330px;
+  margin: 0;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px) {
+  .sh-notifications-page {
+    padding: 22px 12px 50px;
+  }
+
+  .sh-notifications-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .sh-notifications-back {
+    margin-bottom: 13px;
+    font-size: 12px;
+  }
+
+  .sh-notifications-title-row {
+    gap: 10px;
+  }
+
+  .sh-notifications-title-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 11px;
+  }
+
+  .sh-notifications-title-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .sh-notifications-title-row h1 {
+    font-size: 25px;
+  }
+
+  .sh-notifications-title-row p {
+    font-size: 11px;
+  }
+
+  .sh-notifications-mark-all {
+    width: 100%;
+    min-height: 36px;
+    font-size: 11px;
+  }
+
+  .sh-notifications-tabs {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sh-notifications-tabs button {
+    flex: 1;
+    min-height: 31px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .sh-notification-item {
+    gap: 10px;
+    padding: 14px 12px;
+  }
+
+  .sh-notification-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .sh-notification-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .sh-notification-content {
+    padding-right: 24px;
+  }
+
+  .sh-notification-top h3 {
+    font-size: 12px;
+  }
+
+  .sh-notification-content p {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .sh-notification-time {
+    font-size: 10px;
+  }
+
+  .sh-notification-delete {
+    top: 14px;
+    right: 10px;
+    opacity: 1;
+    width: 27px;
+    height: 27px;
+  }
+
+  .sh-notifications-empty {
+    min-height: 280px;
   }
 }

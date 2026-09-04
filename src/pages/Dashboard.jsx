@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Package,
@@ -23,6 +24,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [userPlan, setUserPlan] = useState(null);
   const [recentListings, setRecentListings] = useState([]);
+  const navigate = useNavigate();
   // const [recentListingsLoading, setRecentListingsLoading] = useState(true);
 
   const [stats, setStats] = useState({
@@ -378,16 +380,17 @@ export default function Dashboard() {
           >
             <Menu size={20} />
           </button>
-
           <div className="sh-dashboard-topbar-spacer" />
 
           <button
             type="button"
             className="sh-dashboard-notification"
             aria-label="Notifications"
+            onClick={() => navigate("/dashboard/notifications")}
           >
-            <Bell size={19} />
-            <span />
+            {" "}
+            <Bell size={19} />{" "}
+            <span className="sh-dashboard-notification-dot" />{" "}
           </button>
 
           <a href="/dashboard/profile" className="sh-dashboard-user">
@@ -657,6 +660,15 @@ export default function Dashboard() {
                   {recentListings.map((listing) => {
                     const image = listing.listing_images?.[0]?.image_url;
 
+                    const isPlanExpired =
+                      !userPlan ||
+                      userPlan.status !== "active" ||
+                      (userPlan.expired_at &&
+                        new Date(userPlan.expired_at) <= new Date());
+
+                    const isHiddenByPlan =
+                      isPlanExpired && listing.status === "published";
+
                     return (
                       <a
                         key={listing.id}
@@ -683,13 +695,23 @@ export default function Dashboard() {
                               ? `₦${Number(listing.price).toLocaleString()}`
                               : "Contact seller"}
                           </strong>
+
+                          {isHiddenByPlan && (
+                            <small className="sh-listing-hidden-message">
+                              Subscription expired — hidden from customers
+                            </small>
+                          )}
                         </div>
 
                         <div className="sh-dashboard-recent-status">
                           <span
-                            className={`sh-status sh-status-${listing.status}`}
+                            className={`sh-status ${
+                              isHiddenByPlan
+                                ? "sh-status-expired"
+                                : `sh-status-${listing.status}`
+                            }`}
                           >
-                            {listing.status}
+                            {isHiddenByPlan ? "Hidden" : listing.status}
                           </span>
                         </div>
                       </a>

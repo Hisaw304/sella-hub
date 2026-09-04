@@ -22,7 +22,12 @@ const FeaturedListings = () => {
         setLoading(true);
         setError("");
 
-        // Get published listings
+        /*
+      ========================================
+      GET PUBLISHED LISTINGS
+      ========================================
+      */
+
         const { data: listingData, error: listingError } = await supabase
           .from("listings")
           .select(
@@ -36,7 +41,7 @@ const FeaturedListings = () => {
           )
           .eq("status", "published")
           .order("created_at", { ascending: false })
-          .limit(6);
+          .limit(20);
 
         if (listingError) {
           throw listingError;
@@ -47,20 +52,84 @@ const FeaturedListings = () => {
           return;
         }
 
-        // Get seller profiles separately
+        /*
+      ========================================
+      GET SELLERS
+      ========================================
+      */
+
         const userIds = [
           ...new Set(
             listingData.map((listing) => listing.user_id).filter(Boolean)
           ),
         ];
 
-        let profiles = [];
+        /*
+      ========================================
+      GET ACTIVE PLANS
+      ========================================
+      */
+
+        let activePlans = [];
 
         if (userIds.length > 0) {
+          const { data: planData, error: planError } = await supabase
+            .from("user_plans")
+            .select(
+              `
+            user_id,
+            status,
+            expired_at
+          `
+            )
+            .in("user_id", userIds)
+            .eq("status", "active")
+            .gt("expired_at", new Date().toISOString());
+
+          if (planError) {
+            throw planError;
+          }
+
+          activePlans = planData || [];
+        }
+
+        /*
+      ========================================
+      ONLY KEEP LISTINGS FROM USERS
+      WITH ACTIVE SUBSCRIPTIONS
+      ========================================
+      */
+
+        const activeUserIds = new Set(activePlans.map((plan) => plan.user_id));
+
+        const activeListings = listingData.filter((listing) =>
+          activeUserIds.has(listing.user_id)
+        );
+
+        if (activeListings.length === 0) {
+          setListings([]);
+          return;
+        }
+
+        /*
+      ========================================
+      GET SELLER PROFILES
+      ========================================
+      */
+
+        const activeSellerIds = [
+          ...new Set(
+            activeListings.map((listing) => listing.user_id).filter(Boolean)
+          ),
+        ];
+
+        let profiles = [];
+
+        if (activeSellerIds.length > 0) {
           const { data: profileData, error: profileError } = await supabase
             .from("profiles")
             .select("id, full_name, avatar_url, role")
-            .in("id", userIds);
+            .in("id", activeSellerIds);
 
           if (profileError) {
             console.warn("Profiles loading error:", profileError);
@@ -69,14 +138,26 @@ const FeaturedListings = () => {
           }
         }
 
-        // Attach seller profile to each listing
-        const listingsWithProfiles = listingData.map((listing) => ({
+        /*
+      ========================================
+      ATTACH SELLER PROFILE
+      ========================================
+      */
+
+        const listingsWithProfiles = activeListings.map((listing) => ({
           ...listing,
+
           profiles:
             profiles.find((profile) => profile.id === listing.user_id) || null,
         }));
 
-        setListings(listingsWithProfiles);
+        /*
+      ========================================
+      SHOW ONLY 6 FEATURED LISTINGS
+      ========================================
+      */
+
+        setListings(listingsWithProfiles.slice(0, 6));
       } catch (err) {
         console.error("Featured listings error:", err);
         setError("Unable to load featured listings.");

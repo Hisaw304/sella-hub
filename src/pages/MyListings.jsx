@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   Clock3,
   Edit3,
+  EyeOff,
   Eye,
   FileText,
   MoreHorizontal,
@@ -30,6 +31,7 @@ const MyListings = () => {
 
   const [openMenu, setOpenMenu] = useState(null);
   const [error, setError] = useState("");
+  const [userPlan, setUserPlan] = useState(null);
 
   /*
   ========================================
@@ -95,6 +97,51 @@ const MyListings = () => {
 
     loadListings();
   }, [navigate]);
+
+  useEffect(() => {
+    const fetchUserPlan = async () => {
+      if (!user?.id) {
+        setUserPlan(null);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("user_plans")
+          .select(
+            `
+          *,
+          pricing_plans (
+            name,
+            price,
+            max_listings,
+            max_images
+          )
+        `
+          )
+          .eq("user_id", user.id)
+          .eq("status", "active")
+          .order("created_at", {
+            ascending: false,
+          })
+          .limit(1)
+          .maybeSingle();
+
+        if (error) {
+          console.error("My listings plan error:", error);
+          setUserPlan(null);
+          return;
+        }
+
+        setUserPlan(data);
+      } catch (err) {
+        console.error("My listings plan error:", err);
+        setUserPlan(null);
+      }
+    };
+
+    fetchUserPlan();
+  }, [user]);
 
   /*
   ========================================
@@ -427,13 +474,28 @@ const MyListings = () => {
         </div>
 
         {/* ========================================
-            LISTINGS
-        ======================================== */}
+    LISTINGS
+======================================== */}
 
         {filteredListings.length > 0 ? (
           <div className="sh-my-listings-list">
             {filteredListings.map((listing) => {
-              const status = getStatus(listing.status);
+              const isPlanExpired =
+                !userPlan ||
+                userPlan.status !== "active" ||
+                (userPlan.expired_at &&
+                  new Date(userPlan.expired_at) <= new Date());
+
+              const isHiddenByPlan =
+                isPlanExpired && listing.status === "published";
+
+              const status = isHiddenByPlan
+                ? {
+                    label: "Hidden",
+                    icon: <EyeOff size={14} />,
+                    className: "expired",
+                  }
+                : getStatus(listing.status);
 
               const image = getMainImage(listing);
 
@@ -466,7 +528,16 @@ const MyListings = () => {
                           {listing.description?.slice(0, 115)}
                           {listing.description?.length > 115 ? "..." : ""}
                         </p>
+
+                        {isHiddenByPlan && (
+                          <small className="sh-listing-hidden-message">
+                            Your subscription has expired. This listing is
+                            hidden from customers.
+                          </small>
+                        )}
                       </div>
+
+                      {/* MENU */}
 
                       <div className="sh-my-listing-menu">
                         <button
@@ -505,6 +576,7 @@ const MyListings = () => {
                               disabled={deleting === listing.id}
                             >
                               <Trash2 size={14} />
+
                               {deleting === listing.id
                                 ? "Deleting..."
                                 : "Delete"}
@@ -513,6 +585,8 @@ const MyListings = () => {
                         )}
                       </div>
                     </div>
+
+                    {/* BOTTOM */}
 
                     <div className="sh-my-listing-bottom">
                       <div className="sh-my-listing-price">

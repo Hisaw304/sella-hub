@@ -116,61 +116,66 @@ export default function BrowseListings() {
         setLoading(true);
         setError("");
 
+        /*
+      ========================================
+      GET PUBLISHED LISTINGS
+      ========================================
+      */
+
         let query = supabase
           .from("listings")
           .select(
             `
+            id,
+            user_id,
+            category_id,
+            title,
+            slug,
+            description,
+            price,
+            price_type,
+            location,
+            status,
+            created_at,
+            categories (
               id,
-              user_id,
-              category_id,
-              title,
-              slug,
-              description,
-              price,
-              price_type,
-              location,
-              status,
-              created_at,
-              categories (
-                id,
-                name,
-                slug
-              ),
-              listing_images (
-                id,
-                image_url,
-                sort_order
-              )
-            `,
-            { count: "exact" }
+              name,
+              slug
+            ),
+            listing_images (
+              id,
+              image_url,
+              sort_order
+            )
+          `
           )
           .eq("status", "published");
 
         /*
-        ========================================
-        SEARCH
-        ========================================
-        */
+      ========================================
+      SEARCH
+      ========================================
+      */
 
         if (search.trim()) {
           query = query.ilike("title", `%${search.trim()}%`);
         }
 
         /*
-        ========================================
-        LOCATION
-        ========================================
-        */
+      ========================================
+      LOCATION
+      ========================================
+      */
 
         if (location.trim()) {
           query = query.ilike("location", `%${location.trim()}%`);
         }
 
         /*
-        ========================================
-        CATEGORY
-        ========================================
-        */
+      ========================================
+      CATEGORY
+      ========================================
+      */
 
         if (category) {
           const selectedCategory = categories.find(
@@ -183,10 +188,10 @@ export default function BrowseListings() {
         }
 
         /*
-        ========================================
-        PRICE
-        ========================================
-        */
+      ========================================
+      PRICE
+      ========================================
+      */
 
         if (minPrice !== "") {
           query = query.gte("price", Number(minPrice));
@@ -197,10 +202,10 @@ export default function BrowseListings() {
         }
 
         /*
-        ========================================
-        SORT
-        ========================================
-        */
+      ========================================
+      SORT
+      ========================================
+      */
 
         if (sort === "oldest") {
           query = query.order("created_at", {
@@ -221,24 +226,89 @@ export default function BrowseListings() {
         }
 
         /*
-        ========================================
-        FETCH
-        ========================================
-        */
+      ========================================
+      FETCH ALL MATCHING PUBLISHED LISTINGS
+      ========================================
+      */
 
-        const from = (page - 1) * ITEMS_PER_PAGE;
-
-        const to = from + ITEMS_PER_PAGE - 1;
-
-        query = query.range(from, to);
-
-        const { data, error: listingsError, count } = await query;
+        const { data: listingData, error: listingsError } = await query;
 
         if (listingsError) {
           throw listingsError;
         }
 
-        const formattedListings = (data || []).map((listing) => ({
+        if (!listingData || listingData.length === 0) {
+          setListings([]);
+          setTotalPages(1);
+          return;
+        }
+
+        /*
+      ========================================
+      GET SELLER IDS
+      ========================================
+      */
+
+        const userIds = [
+          ...new Set(
+            listingData.map((listing) => listing.user_id).filter(Boolean)
+          ),
+        ];
+
+        /*
+      ========================================
+      GET ACTIVE SELLER PLANS
+      ========================================
+      */
+
+        let activePlans = [];
+
+        if (userIds.length > 0) {
+          const { data: planData, error: planError } = await supabase
+            .from("user_plans")
+            .select(
+              `
+            user_id,
+            status,
+            expired_at
+          `
+            )
+            .in("user_id", userIds)
+            .eq("status", "active")
+            .gt("expired_at", new Date().toISOString());
+
+          if (planError) {
+            throw planError;
+          }
+
+          activePlans = planData || [];
+        }
+
+        /*
+      ========================================
+      ACTIVE SELLER IDS
+      ========================================
+      */
+
+        const activeUserIds = new Set(activePlans.map((plan) => plan.user_id));
+
+        /*
+      ========================================
+      REMOVE LISTINGS FROM EXPIRED SELLERS
+      ========================================
+      */
+
+        const activeListings = listingData.filter((listing) =>
+          activeUserIds.has(listing.user_id)
+        );
+
+        /*
+      ========================================
+      SORT IMAGES
+      ========================================
+      */
+
+        const formattedListings = activeListings.map((listing) => ({
           ...listing,
 
           listing_images: [...(listing.listing_images || [])].sort(
@@ -246,13 +316,29 @@ export default function BrowseListings() {
           ),
         }));
 
-        setListings(formattedListings);
+        /*
+      ========================================
+      PAGINATION
+      ========================================
+      */
+
+        const total = formattedListings.length;
+
+        const from = (page - 1) * ITEMS_PER_PAGE;
+
+        const to = from + ITEMS_PER_PAGE;
+
+        const paginatedListings = formattedListings.slice(from, to);
+
+        setListings(paginatedListings);
+
+        setTotalPages(Math.max(Math.ceil(total / ITEMS_PER_PAGE), 1));
 
         /*
-        ========================================
-        UPDATE URL
-        ========================================
-        */
+      ========================================
+      UPDATE URL
+      ========================================
+      */
 
         const params = new URLSearchParams();
 
@@ -287,14 +373,6 @@ export default function BrowseListings() {
         setSearchParams(params, {
           replace: true,
         });
-
-        /*
-        ========================================
-        TOTAL PAGES
-        ========================================
-        */
-
-        setTotalPages(Math.max(Math.ceil((count || 0) / ITEMS_PER_PAGE), 1));
       } catch (err) {
         console.error("Browse listings error:", err);
 
@@ -305,9 +383,10 @@ export default function BrowseListings() {
     };
 
     /*
-      Wait for categories before applying
-      category filtering.
-    */
+  ========================================
+  WAIT FOR CATEGORIES
+  ========================================
+  */
 
     if (!categoriesLoading) {
       fetchListings();
@@ -324,7 +403,6 @@ export default function BrowseListings() {
     categoriesLoading,
     setSearchParams,
   ]);
-
   /*
   ========================================
   RESET PAGE WHEN FILTER CHANGES
