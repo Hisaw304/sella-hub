@@ -8918,3 +8918,1173 @@ body {
     width: 100%;
   }
 }
+
+/* =========================================================
+   SELLАHUB EXPERIENCE SECTION
+========================================================= */
+
+.sh-experience {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 20px;
+  background: var(--sh-body);
+  color: var(--sh-text);
+}
+
+.sh-experience-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+  align-items: center;
+  gap: 80px;
+}
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.sh-experience-content {
+  position: relative;
+  z-index: 2;
+  max-width: 570px;
+}
+
+.sh-experience-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 24px;
+
+  font-family: var(--sh-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--sh-secondary);
+}
+
+.sh-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sh-accent);
+  box-shadow: 0 0 0 5px rgba(176, 122, 74, 0.1);
+}
+
+.sh-experience-content h2 {
+  margin: 0;
+  color: var(--sh-primary);
+
+  font-family: var(--sh-font-display);
+  font-size: clamp(3.6rem, 6vw, 5.6rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.sh-experience-content h2 span {
+  color: var(--sh-accent);
+}
+
+.sh-experience-description {
+  max-width: 510px;
+  margin: 30px 0 32px;
+
+  color: var(--sh-text-muted);
+  font-family: var(--sh-font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.sh-experience-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 0 21px;
+
+  border-radius: 9px;
+  background: var(--sh-primary);
+  color: #ffffff;
+
+  font-family: var(--sh-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sh-experience-button:hover {
+  transform: translateY(-3px);
+  background: var(--sh-secondary);
+  box-shadow: 0 12px 28px rgba(49, 55, 43, 0.16);
+}
+
+.sh-experience-button svg {
+  transition: transform 0.3s ease;
+}
+
+.sh-experience-button:hover svg {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.sh-experience-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  margin-top: 42px;
+}
+
+.sh-experience-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sh-feature-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(107, 112, 92, 0.2);
+  border-radius: 50%;
+
+  background: var(--sh-surface);
+  color: var(--sh-accent);
+
+  box-shadow: 0 5px 15px rgba(49, 55, 43, 0.05);
+}
+
+.sh-experience-feature > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sh-experience-feature strong {
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sh-experience-feature span {
+  color: var(--sh-text-muted);
+  font-family: var(--sh-font-body);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   PHONE AREA
+========================================================= */
+
+.sh-phone-area {
+  position: relative;
+
+  min-height: 650px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sh-phone-area::before {
+  content: "";
+
+  position: absolute;
+
+  width: 480px;
+  height: 480px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(107, 112, 92, 0.13) 0%,
+    rgba(107, 112, 92, 0.06) 40%,
+    transparent 72%
+  );
+
+  filter: blur(2px);
+}
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+.sh-phone {
+  position: relative;
+  z-index: 3;
+
+  width: 330px;
+  height: 635px;
+
+  filter: drop-shadow(0 35px 40px rgba(37, 41, 31, 0.18))
+    drop-shadow(0 10px 12px rgba(37, 41, 31, 0.1));
+
+  animation: sh-phone-float 5s ease-in-out infinite;
+}
+
+@keyframes sh-phone-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* PHONE SIDE BUTTONS */
+
+.sh-phone-button {
+  position: absolute;
+  left: -3px;
+
+  width: 4px;
+
+  background: var(--sh-primary);
+
+  border-radius: 5px 0 0 5px;
+}
+
+.sh-phone-button-one {
+  top: 135px;
+  height: 55px;
+}
+
+.sh-phone-button-two {
+  top: 205px;
+  height: 85px;
+}
+
+/* PHONE FRAME */
+
+.sh-phone-frame {
+  position: absolute;
+  inset: 0;
+
+  padding: 7px;
+
+  border-radius: 46px;
+
+  background: linear-gradient(
+    145deg,
+    #4c5147,
+    var(--sh-primary) 40%,
+    #1e231b 100%
+  );
+
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.15),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   PHONE SCREEN
+========================================================= */
+
+.sh-phone-screen {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 40px;
+
+  background: var(--sh-body);
+
+  font-family: var(--sh-font-body);
+}
+
+/* =========================================================
+   DYNAMIC ISLAND
+========================================================= */
+
+.sh-phone-island {
+  position: absolute;
+  z-index: 10;
+
+  top: 12px;
+  left: 50%;
+
+  width: 95px;
+  height: 27px;
+
+  transform: translateX(-50%);
+
+  border-radius: 20px;
+
+  background: #11140f;
+
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.06);
+}
+
+.sh-phone-island span {
+  position: absolute;
+
+  right: 13px;
+  top: 8px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #20251e;
+}
+
+/* =========================================================
+   PHONE HEADER
+========================================================= */
+
+.sh-phone-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 54px 18px 13px;
+
+  border-bottom: 1px solid rgba(107, 112, 92, 0.1);
+
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.sh-phone-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sh-phone-logo {
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: var(--sh-primary);
+  color: #ffffff;
+
+  font-family: var(--sh-font-display);
+  font-size: 19px;
+}
+
+.sh-phone-brand > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sh-phone-brand strong {
+  color: var(--sh-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sh-phone-brand span {
+  color: var(--sh-text-muted);
+  font-size: 8px;
+}
+
+.sh-phone-header-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(107, 112, 92, 0.13);
+  border-radius: 50%;
+
+  background: var(--sh-surface);
+  color: var(--sh-secondary);
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.sh-phone-date {
+  padding: 12px 18px 7px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-align: center;
+}
+
+/* =========================================================
+   CHAT AREA
+========================================================= */
+
+.sh-phone-chat {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  padding: 4px 15px 72px;
+
+  height: calc(100% - 112px);
+
+  overflow: hidden;
+}
+
+/* CHAT ROW */
+
+.sh-chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+
+  width: 100%;
+}
+
+.sh-chat-user {
+  justify-content: flex-end;
+}
+
+.sh-chat-seller {
+  justify-content: flex-start;
+}
+
+/* =========================================================
+   CHAT BUBBLES
+========================================================= */
+
+.sh-chat-bubble {
+  max-width: 82%;
+
+  padding: 10px 12px;
+
+  border-radius: 15px;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  animation: sh-message-in 0.45s ease both;
+}
+
+@keyframes sh-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sh-user-bubble {
+  border-bottom-right-radius: 5px;
+
+  background: var(--sh-primary);
+  color: #ffffff;
+}
+
+.sh-user-bubble strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sh-seller-bubble {
+  border-bottom-left-radius: 5px;
+
+  background: var(--sh-surface);
+  color: var(--sh-text);
+
+  box-shadow: 0 4px 14px rgba(49, 55, 43, 0.06);
+
+  border: 1px solid rgba(107, 112, 92, 0.08);
+}
+
+/* SELLER AVATAR */
+
+.sh-seller-avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* =========================================================
+   TYPING INDICATOR
+========================================================= */
+
+.sh-typing-row {
+  animation: sh-message-in 0.4s ease both;
+}
+
+.sh-typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 11px 12px;
+
+  border-radius: 14px;
+  border-bottom-left-radius: 5px;
+
+  background: var(--sh-surface);
+
+  box-shadow: 0 4px 14px rgba(49, 55, 43, 0.06);
+
+  border: 1px solid rgba(107, 112, 92, 0.08);
+}
+
+.sh-typing-bubble span {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: var(--sh-secondary);
+
+  animation: sh-typing 1.2s infinite ease-in-out;
+}
+
+.sh-typing-bubble span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.sh-typing-bubble span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes sh-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* =========================================================
+   MINI LISTING CARD
+========================================================= */
+
+.sh-mini-listing {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  width: calc(100% - 30px);
+
+  padding: 8px;
+
+  margin-left: 31px;
+
+  border: 1px solid rgba(107, 112, 92, 0.11);
+  border-radius: 13px;
+
+  background: var(--sh-surface);
+
+  box-shadow: 0 6px 18px rgba(49, 55, 43, 0.07);
+
+  animation: sh-listing-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sh-listing-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sh-mini-listing-image {
+  flex: 0 0 52px;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 9px;
+
+  background: linear-gradient(145deg, #e8e2d5, #f5f1e8);
+}
+
+.sh-second-image {
+  background: linear-gradient(145deg, #dedbd2, #f0eee8);
+}
+
+/* =========================================================
+   LAPTOP PLACEHOLDER
+========================================================= */
+
+.sh-laptop-placeholder {
+  position: relative;
+
+  width: 34px;
+  height: 27px;
+}
+
+.sh-laptop-screen {
+  position: absolute;
+
+  top: 0;
+  left: 4px;
+
+  width: 26px;
+  height: 19px;
+
+  border: 2px solid var(--sh-primary);
+  border-radius: 3px;
+
+  background: linear-gradient(135deg, var(--sh-secondary), var(--sh-primary));
+}
+
+.sh-laptop-base {
+  position: absolute;
+
+  left: 0;
+  bottom: 3px;
+
+  width: 34px;
+  height: 4px;
+
+  border-radius: 2px 2px 5px 5px;
+
+  background: var(--sh-primary);
+}
+
+.sh-dark-laptop .sh-laptop-screen {
+  border-color: var(--sh-secondary);
+  background: var(--sh-secondary);
+}
+
+.sh-dark-laptop .sh-laptop-base {
+  background: var(--sh-secondary);
+}
+
+/* =========================================================
+   LISTING INFORMATION
+========================================================= */
+
+.sh-mini-listing-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  flex: 1;
+}
+
+.sh-mini-listing-title {
+  overflow: hidden;
+
+  color: var(--sh-text);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sh-mini-listing-price {
+  color: var(--sh-accent);
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.sh-mini-listing-location {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 7px;
+}
+
+.sh-mini-listing-arrow {
+  flex: 0 0 auto;
+
+  color: var(--sh-secondary);
+}
+
+/* SECOND CARD */
+
+.sh-mini-listing-second {
+  animation-delay: 0.12s;
+}
+
+/* =========================================================
+   SEARCH HINT
+========================================================= */
+
+.sh-phone-search-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: auto;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(107, 112, 92, 0.1);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  color: var(--sh-text-muted);
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   PHONE INPUT
+========================================================= */
+
+.sh-phone-input {
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  bottom: 25px;
+
+  z-index: 5;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 7px 0 13px;
+
+  border: 1px solid rgba(107, 112, 92, 0.13);
+  border-radius: 15px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow: 0 8px 22px rgba(49, 55, 43, 0.09);
+
+  backdrop-filter: blur(10px);
+}
+
+.sh-phone-input > span {
+  color: var(--sh-text-muted);
+
+  font-size: 9px;
+}
+
+.sh-phone-send {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: var(--sh-primary);
+  color: #ffffff;
+}
+
+/* =========================================================
+   HOME INDICATOR
+========================================================= */
+
+.sh-phone-home-indicator {
+  position: absolute;
+
+  left: 50%;
+  bottom: 8px;
+
+  width: 78px;
+  height: 4px;
+
+  transform: translateX(-50%);
+
+  border-radius: 10px;
+
+  background: var(--sh-primary);
+
+  opacity: 0.8;
+}
+
+/* =========================================================
+   FLOATING CARDS
+========================================================= */
+
+.sh-floating-card {
+  position: absolute;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 10px 13px;
+
+  border: 1px solid rgba(107, 112, 92, 0.1);
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  box-shadow: 0 14px 35px rgba(49, 55, 43, 0.1);
+
+  backdrop-filter: blur(12px);
+
+  animation: sh-floating-card 4.5s ease-in-out infinite;
+}
+
+.sh-floating-card strong {
+  display: block;
+
+  color: var(--sh-text);
+
+  font-family: var(--sh-font-body);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sh-floating-card span {
+  display: block;
+
+  margin-top: 1px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 8px;
+}
+
+.sh-floating-icon,
+.sh-floating-check {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+}
+
+.sh-floating-icon {
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-floating-check {
+  background: rgba(107, 112, 92, 0.1);
+  color: var(--sh-secondary);
+}
+
+.sh-floating-top {
+  top: 75px;
+  left: 2px;
+}
+
+.sh-floating-bottom {
+  right: -5px;
+  bottom: 78px;
+
+  animation-delay: -2s;
+}
+
+@keyframes sh-floating-card {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =========================================================
+   SPARKLE
+========================================================= */
+
+.sh-phone-sparkle {
+  position: absolute;
+
+  right: 45px;
+  top: 115px;
+
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(176, 122, 74, 0.16);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  color: var(--sh-accent);
+
+  animation: sh-sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sh-sparkle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(8deg) scale(1.08);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .sh-experience {
+    padding: 100px 24px;
+  }
+
+  .sh-experience-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+
+  .sh-experience-content h2 {
+    font-size: clamp(3.2rem, 6vw, 4.5rem);
+  }
+
+  .sh-experience-description {
+    font-size: 15px;
+  }
+
+  .sh-phone-area {
+    min-height: 610px;
+  }
+
+  .sh-phone {
+    width: 300px;
+    height: 580px;
+  }
+
+  .sh-floating-top {
+    left: -5px;
+  }
+
+  .sh-floating-bottom {
+    right: -5px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .sh-experience {
+    padding: 80px 18px;
+  }
+
+  .sh-experience-container {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .sh-experience-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .sh-experience-eyebrow {
+    justify-content: center;
+  }
+
+  .sh-experience-content h2 {
+    font-size: clamp(3rem, 15vw, 4.3rem);
+    line-height: 0.94;
+  }
+
+  .sh-experience-description {
+    margin: 24px auto 28px;
+    max-width: 500px;
+
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .sh-experience-button {
+    margin: 0 auto;
+  }
+
+  .sh-experience-features {
+    justify-content: center;
+    gap: 14px 20px;
+    margin-top: 34px;
+  }
+
+  .sh-experience-feature {
+    text-align: left;
+  }
+
+  .sh-phone-area {
+    min-height: 620px;
+  }
+
+  .sh-phone {
+    width: 300px;
+    height: 580px;
+  }
+
+  .sh-floating-top {
+    top: 50px;
+    left: 0;
+  }
+
+  .sh-floating-bottom {
+    right: 0;
+    bottom: 55px;
+  }
+
+  .sh-phone-sparkle {
+    right: 18px;
+    top: 90px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 430px) {
+  .sh-experience {
+    padding: 70px 14px;
+  }
+
+  .sh-experience-content h2 {
+    font-size: 3.25rem;
+  }
+
+  .sh-experience-description {
+    font-size: 13.5px;
+  }
+
+  .sh-experience-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .sh-phone-area {
+    min-height: 585px;
+  }
+
+  .sh-phone {
+    width: 275px;
+    height: 535px;
+  }
+
+  .sh-phone-frame {
+    border-radius: 40px;
+    padding: 6px;
+  }
+
+  .sh-phone-screen {
+    border-radius: 34px;
+  }
+
+  .sh-phone-header {
+    padding-top: 48px;
+  }
+
+  .sh-floating-card {
+    display: none;
+  }
+
+  /* .sh-floating-top {
+    left: -15px;
+  }
+
+  .sh-floating-bottom {
+    right: -15px;
+  }
+
+  .sh-phone-sparkle {
+    right: 0;
+  } */
+}
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sh-phone,
+  .sh-floating-card,
+  .sh-phone-sparkle,
+  .sh-typing-bubble span {
+    animation: none;
+  }
+
+  .sh-experience-button,
+  .sh-experience-button svg {
+    transition: none;
+  }
+}

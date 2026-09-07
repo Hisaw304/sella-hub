@@ -6,6 +6,7 @@ import HowItWorks from "../components/HowItWorks";
 import WhySell from "../components/WhySell";
 import PricingPlans from "../components/PricingPlans";
 import FooterCTA from "../components/FooterCTA";
+import SellaHubExperience from "../components/SellaHubExperience";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Hero />
       <FeaturedListings />
       <Categories />
+      <SellaHubExperience />
       <HowItWorks />
       <WhySell />
       <PricingPlans />
