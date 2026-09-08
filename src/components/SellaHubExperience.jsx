@@ -8,6 +8,8 @@ import {
   ShoppingBag,
   Sparkles,
 } from "lucide-react";
+import hpLaptop from "../assets/hp-laptop.jpg";
+import lenovoLaptop from "../assets/lenovo.jpg";
 // import "./SellaHubExperience.css";
 
 const SellaHubExperience = () => {
@@ -175,10 +177,7 @@ const SellaHubExperience = () => {
                   {step >= 3 && (
                     <div className="sh-mini-listing">
                       <div className="sh-mini-listing-image">
-                        <div className="sh-laptop-placeholder">
-                          <div className="sh-laptop-screen"></div>
-                          <div className="sh-laptop-base"></div>
-                        </div>
+                        <img src={hpLaptop} alt="HP EliteBook 840" />
                       </div>
 
                       <div className="sh-mini-listing-info">
@@ -201,11 +200,8 @@ const SellaHubExperience = () => {
                   {/* SECOND LISTING */}
                   {step >= 3 && (
                     <div className="sh-mini-listing sh-mini-listing-second">
-                      <div className="sh-mini-listing-image sh-second-image">
-                        <div className="sh-laptop-placeholder sh-dark-laptop">
-                          <div className="sh-laptop-screen"></div>
-                          <div className="sh-laptop-base"></div>
-                        </div>
+                      <div className="sh-mini-listing-image">
+                        <img src={lenovoLaptop} alt="Lenovo ThinkPad" />
                       </div>
 
                       <div className="sh-mini-listing-info">

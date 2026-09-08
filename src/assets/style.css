@@ -9417,7 +9417,7 @@ body {
 }
 
 .sh-seller-bubble {
-  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 11px;
 
   background: var(--sh-surface);
   color: var(--sh-text);
@@ -9430,17 +9430,24 @@ body {
 /* SELLER AVATAR */
 
 .sh-seller-avatar {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  min-height: 34px;
-  flex: 0 0 34px;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+
+  flex: 0 0 34px !important;
+  aspect-ratio: 1 / 1;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
+  box-sizing: border-box;
+
+  font-size: 14px;
   font-weight: 600;
   line-height: 1;
 }
@@ -9563,53 +9570,20 @@ body {
   background: linear-gradient(145deg, #dedbd2, #f0eee8);
 }
 
-/* =========================================================
-   LAPTOP PLACEHOLDER
-========================================================= */
-
-.sh-laptop-placeholder {
-  position: relative;
-
-  width: 34px;
-  height: 27px;
+.sh-mini-listing-image {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f1eee5;
 }
 
-.sh-laptop-screen {
-  position: absolute;
-
-  top: 0;
-  left: 4px;
-
-  width: 26px;
-  height: 19px;
-
-  border: 2px solid var(--sh-primary);
-  border-radius: 3px;
-
-  background: linear-gradient(135deg, var(--sh-secondary), var(--sh-primary));
-}
-
-.sh-laptop-base {
-  position: absolute;
-
-  left: 0;
-  bottom: 3px;
-
-  width: 34px;
-  height: 4px;
-
-  border-radius: 2px 2px 5px 5px;
-
-  background: var(--sh-primary);
-}
-
-.sh-dark-laptop .sh-laptop-screen {
-  border-color: var(--sh-secondary);
-  background: var(--sh-secondary);
-}
-
-.sh-dark-laptop .sh-laptop-base {
-  background: var(--sh-secondary);
+.sh-mini-listing-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 /* =========================================================
@@ -9676,7 +9650,7 @@ body {
   align-items: center;
   gap: 6px;
 
-  margin-top: auto;
+  margin-top: 14px;
 
   padding: 10px 12px;
 
@@ -9684,7 +9658,6 @@ body {
   border-radius: 12px;
 
   background: rgba(255, 255, 255, 0.75);
-
   color: var(--sh-text-muted);
 
   font-size: 9px;
