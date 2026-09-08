@@ -39,9 +39,10 @@ const AdminDashboard = () => {
         */
 
         const { count: listingCount, error: listingsCountError } =
-          await supabase
-            .from("listings")
-            .select("*", { count: "exact", head: true });
+          await supabase.from("listings").select("*", {
+            count: "exact",
+            head: true,
+          });
 
         if (listingsCountError) {
           throw listingsCountError;
@@ -49,18 +50,38 @@ const AdminDashboard = () => {
 
         /*
         ========================================
-        FETCH SELLERS
+        FETCH ACTIVE SELLERS
         ========================================
         */
 
-        const { count: sellerCount, error: sellersCountError } = await supabase
-          .from("profiles")
-          .select("*", { count: "exact", head: true })
-          .eq("role", "seller");
+        const { data: activeSellerPlans, error: activeSellerError } =
+          await supabase
+            .from("user_plans")
+            .select(
+              `
+      user_id,
+      status,
+      started_at,
+      expired_at
+    `
+            )
+            .eq("status", "active")
+            .gt("expired_at", new Date().toISOString());
 
-        if (sellersCountError) {
-          throw sellersCountError;
+        console.log("ACTIVE SELLER PLANS:", activeSellerPlans);
+        console.log("ACTIVE SELLER ERROR:", activeSellerError);
+
+        if (activeSellerError) {
+          throw activeSellerError;
         }
+
+        const activeSellerIds = [
+          ...new Set((activeSellerPlans || []).map((plan) => plan.user_id)),
+        ];
+
+        console.log("ACTIVE SELLER IDS:", activeSellerIds);
+
+        const sellerCount = activeSellerIds.length;
 
         /*
         ========================================
@@ -68,11 +89,15 @@ const AdminDashboard = () => {
         ========================================
         */
 
+        // For now, normal "user" profiles are treated as customers.
         const { count: customerCount, error: customersCountError } =
           await supabase
             .from("profiles")
-            .select("*", { count: "exact", head: true })
-            .eq("role", "customer");
+            .select("*", {
+              count: "exact",
+              head: true,
+            })
+            .eq("role", "user");
 
         if (customersCountError) {
           throw customersCountError;
@@ -86,7 +111,10 @@ const AdminDashboard = () => {
 
         const { count: pendingCount, error: pendingCountError } = await supabase
           .from("listings")
-          .select("*", { count: "exact", head: true })
+          .select("*", {
+            count: "exact",
+            head: true,
+          })
           .eq("status", "pending");
 
         if (pendingCountError) {
@@ -103,17 +131,19 @@ const AdminDashboard = () => {
           .from("listings")
           .select(
             `
-            id,
-            title,
-            status,
-            created_at,
-            user_id,
-            categories (
-              name
-            )
-          `
+              id,
+              title,
+              status,
+              created_at,
+              user_id,
+              categories (
+                name
+              )
+            `
           )
-          .order("created_at", { ascending: false })
+          .order("created_at", {
+            ascending: false,
+          })
           .limit(5);
 
         if (listingsError) {
@@ -122,29 +152,43 @@ const AdminDashboard = () => {
 
         /*
         ========================================
-        FETCH RECENT SELLERS
+        FETCH RECENT ACTIVE SELLERS
         ========================================
         */
 
-        const { data: sellersData, error: sellersError } = await supabase
-          .from("profiles")
-          .select(
-            `
-            id,
-            full_name,
-            business_name,
-            avatar_url,
-            created_at,
-            role
-          `
-          )
-          .eq("role", "seller")
-          .order("created_at", { ascending: false })
-          .limit(5);
+        let sellersData = [];
 
-        if (sellersError) {
-          throw sellersError;
+        if (activeSellerIds.length > 0) {
+          const { data: profilesData, error: profilesError } = await supabase
+            .from("profiles")
+            .select(
+              `
+              id,
+              full_name,
+              business_name,
+              avatar_url,
+              created_at,
+              role
+            `
+            )
+            .in("id", activeSellerIds)
+            .order("created_at", {
+              ascending: false,
+            })
+            .limit(5);
+
+          if (profilesError) {
+            throw profilesError;
+          }
+
+          sellersData = profilesData || [];
         }
+
+        /*
+        ========================================
+        UPDATE DASHBOARD STATS
+        ========================================
+        */
 
         setStats({
           listings: listingCount || 0,
@@ -153,8 +197,14 @@ const AdminDashboard = () => {
           pending: pendingCount || 0,
         });
 
+        /*
+        ========================================
+        UPDATE RECENT DATA
+        ========================================
+        */
+
         setRecentListings(listingsData || []);
-        setRecentSellers(sellersData || []);
+        setRecentSellers(sellersData);
       } catch (err) {
         console.error("Admin dashboard error:", err);
 
@@ -238,8 +288,8 @@ const AdminDashboard = () => {
       </div>
 
       {/* ========================================
-          STAT CARDS
-      ======================================== */}
+    STAT CARDS
+======================================== */}
 
       <div className="sh-admin-stats">
         {/* LISTINGS */}
@@ -271,7 +321,7 @@ const AdminDashboard = () => {
 
           <strong>{stats.sellers.toLocaleString()}</strong>
 
-          <p>Registered sellers</p>
+          <p>Currently subscribed sellers</p>
         </div>
 
         {/* CUSTOMERS */}

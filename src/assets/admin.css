@@ -1375,3 +1375,1101 @@
     font-size: 10px;
   }
 }
+
+/* =========================================================
+   SELLAHUB — ADMIN LISTINGS
+========================================================= */
+
+.sh-admin-listings-page {
+  width: 100%;
+  min-width: 0;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.sh-admin-listings-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.sh-admin-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--sh-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.sh-admin-listings-header h1 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.sh-admin-listings-header p {
+  margin: 9px 0 0;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sh-admin-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid rgba(49, 55, 43, 0.12);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  color: var(--sh-primary);
+  font-family: var(--sh-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.sh-admin-refresh-btn:hover {
+  border-color: rgba(49, 55, 43, 0.25);
+  background: var(--sh-body);
+  transform: translateY(-1px);
+}
+
+.sh-admin-refresh-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.sh-admin-listing-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.sh-admin-listing-stat {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 82px;
+  padding: 15px 17px;
+  border: 1px solid rgba(49, 55, 43, 0.075);
+  border-radius: 13px;
+  background: var(--sh-surface);
+  box-shadow: 0 3px 15px rgba(49, 55, 43, 0.025);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sh-admin-listing-stat:hover {
+  border-color: rgba(49, 55, 43, 0.13);
+  transform: translateY(-1px);
+}
+
+.sh-admin-listing-stat-icon {
+  width: 37px;
+  height: 37px;
+  min-width: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: rgba(49, 55, 43, 0.065);
+  color: var(--sh-primary);
+}
+
+.sh-admin-listing-stat-icon.pending {
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-listing-stat-icon.published {
+  background: rgba(107, 112, 92, 0.1);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-listing-stat-icon.rejected {
+  background: rgba(49, 55, 43, 0.065);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-listing-stat strong {
+  display: block;
+  color: var(--sh-primary);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.sh-admin-listing-stat span {
+  display: block;
+  margin-top: 5px;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sh-admin-listing-error {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 17px;
+  padding: 11px 13px;
+  border: 1px solid rgba(176, 122, 74, 0.2);
+  border-radius: 9px;
+  background: rgba(176, 122, 74, 0.055);
+  color: var(--sh-accent);
+  font-size: 11px;
+}
+
+.sh-admin-listing-error button {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sh-primary);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.sh-admin-listing-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sh-admin-listing-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 42px;
+  min-width: 220px;
+  padding: 0 12px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  transition: border-color 0.2s ease;
+}
+
+.sh-admin-listing-search:focus-within {
+  border-color: rgba(176, 122, 74, 0.45);
+}
+
+.sh-admin-listing-search > svg {
+  flex: 0 0 auto;
+}
+
+.sh-admin-listing-search input {
+  width: 100%;
+  height: 100%;
+  margin-left: 9px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 11px;
+}
+
+.sh-admin-listing-search input::placeholder {
+  color: var(--sh-text-muted);
+  opacity: 0.72;
+}
+
+.sh-admin-clear-search {
+  width: 23px;
+  height: 23px;
+  min-width: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(49, 55, 43, 0.065);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-filter-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  min-width: 138px;
+  padding: 0 10px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+}
+
+.sh-admin-filter-control > svg:first-child {
+  flex: 0 0 auto;
+}
+
+.sh-admin-filter-control select {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 0 6px;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.sh-admin-filter-control > svg:last-child {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
+
+/* =========================================================
+   RESULT COUNT
+========================================================= */
+
+.sh-admin-listing-result-info {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 9px;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+}
+
+.sh-admin-listing-result-info strong {
+  color: var(--sh-text);
+  font-weight: 700;
+}
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.sh-admin-listing-table-wrap {
+  overflow: visible;
+  border: 1px solid rgba(49, 55, 43, 0.075);
+  border-radius: 14px;
+  background: var(--sh-surface);
+  box-shadow: 0 4px 20px rgba(49, 55, 43, 0.025);
+}
+
+.sh-admin-listing-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 14px 14px 0 0;
+}
+
+.sh-admin-listing-table {
+  width: 100%;
+  min-width: 1080px;
+  border-collapse: collapse;
+}
+
+.sh-admin-listing-table thead {
+  background: rgba(250, 247, 238, 0.72);
+}
+
+.sh-admin-listing-table th {
+  height: 44px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.075);
+  color: var(--sh-text-muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sh-admin-listing-table td {
+  height: 74px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.055);
+  vertical-align: middle;
+}
+
+.sh-admin-listing-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sh-admin-listing-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.sh-admin-listing-table tbody tr:hover {
+  background: rgba(250, 247, 238, 0.38);
+}
+
+/* =========================================================
+   LISTING
+========================================================= */
+
+.sh-admin-listing-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 235px;
+}
+
+.sh-admin-listing-image {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--sh-body);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-listing-title-wrap {
+  min-width: 0;
+}
+
+.sh-admin-listing-title-wrap strong {
+  display: block;
+  max-width: 225px;
+  overflow: hidden;
+  color: var(--sh-text);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sh-admin-listing-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.sh-admin-mini-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sh-admin-mini-badge.featured {
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-mini-badge.verified {
+  background: rgba(107, 112, 92, 0.1);
+  color: var(--sh-secondary);
+}
+
+/* =========================================================
+   SELLER
+========================================================= */
+
+.sh-admin-seller {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 145px;
+}
+
+.sh-admin-seller-avatar {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  flex: 0 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--sh-body);
+  color: var(--sh-primary);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sh-admin-seller-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sh-admin-seller span {
+  max-width: 125px;
+  overflow: hidden;
+  color: var(--sh-text);
+  font-size: 10px;
+  font-weight: 550;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.sh-admin-category {
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.sh-admin-price strong {
+  display: block;
+  color: var(--sh-primary);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sh-admin-price small {
+  display: block;
+  margin-top: 3px;
+  color: var(--sh-text-muted);
+  font-size: 8px;
+  text-transform: capitalize;
+}
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.sh-admin-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 130px;
+  color: var(--sh-text-muted);
+}
+
+.sh-admin-location svg {
+  flex: 0 0 auto;
+}
+
+.sh-admin-location span {
+  overflow: hidden;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.sh-admin-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sh-admin-status > span {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.sh-admin-status.published {
+  background: rgba(107, 112, 92, 0.1);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-status.pending {
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-status.rejected {
+  background: rgba(49, 55, 43, 0.075);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-status.draft {
+  background: rgba(115, 119, 108, 0.09);
+  color: var(--sh-text-muted);
+}
+
+.sh-admin-status.expired {
+  background: rgba(115, 119, 108, 0.09);
+  color: var(--sh-text-muted);
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.sh-admin-date {
+  color: var(--sh-text-muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.sh-admin-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.sh-admin-view-btn,
+.sh-admin-more-btn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 7px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sh-admin-view-btn:hover,
+.sh-admin-more-btn:hover {
+  border-color: rgba(49, 55, 43, 0.18);
+  background: var(--sh-body);
+  color: var(--sh-primary);
+}
+
+/* =========================================================
+   ACTION MENU
+========================================================= */
+
+.sh-admin-action-menu {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 195px;
+  padding: 5px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 10px;
+  background: var(--sh-surface);
+  box-shadow: 0 18px 45px rgba(49, 55, 43, 0.14);
+}
+
+.sh-admin-action-menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 9px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 9px;
+  font-weight: 550;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sh-admin-action-menu button:hover {
+  background: var(--sh-body);
+}
+
+.sh-admin-action-menu button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sh-admin-action-menu button.danger {
+  color: var(--sh-accent);
+}
+
+.sh-admin-menu-divider {
+  height: 1px;
+  margin: 4px 5px;
+  background: rgba(49, 55, 43, 0.07);
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.sh-admin-listing-loading {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--sh-text-muted);
+}
+
+.sh-admin-loader {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 11px;
+  border: 2px solid rgba(49, 55, 43, 0.09);
+  border-top-color: var(--sh-accent);
+  border-radius: 50%;
+  animation: sh-admin-spin 0.8s linear infinite;
+}
+
+.sh-admin-listing-loading p {
+  margin: 0;
+  font-size: 10px;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.sh-admin-listing-empty {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.sh-admin-empty-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 13px;
+  border-radius: 13px;
+  background: var(--sh-body);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-listing-empty h3 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.sh-admin-listing-empty p {
+  max-width: 330px;
+  margin: 6px 0 14px;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.sh-admin-listing-empty button {
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--sh-primary);
+  color: var(--sh-surface);
+  font-family: var(--sh-font-body);
+  font-size: 9px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.sh-admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(49, 55, 43, 0.065);
+}
+
+.sh-admin-pagination > span {
+  color: var(--sh-text-muted);
+  font-size: 9px;
+}
+
+.sh-admin-pagination > span strong {
+  color: var(--sh-text);
+}
+
+.sh-admin-pagination > div {
+  display: flex;
+  gap: 4px;
+}
+
+.sh-admin-pagination button {
+  width: 29px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 7px;
+  background: var(--sh-surface);
+  color: var(--sh-text);
+  cursor: pointer;
+}
+
+.sh-admin-pagination button:hover:not(:disabled) {
+  background: var(--sh-body);
+}
+
+.sh-admin-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   REJECT MODAL
+========================================================= */
+
+.sh-admin-modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(49, 55, 43, 0.42);
+  backdrop-filter: blur(5px);
+}
+
+.sh-admin-modal {
+  position: relative;
+  width: min(440px, 100%);
+  padding: 27px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 16px;
+  background: var(--sh-surface);
+  box-shadow: 0 25px 70px rgba(49, 55, 43, 0.2);
+}
+
+.sh-admin-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 29px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--sh-body);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-modal-icon {
+  width: 41px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 11px;
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-modal h2 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.sh-admin-modal > p {
+  margin: 7px 0 19px;
+  color: var(--sh-text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.sh-admin-modal label {
+  display: block;
+  color: var(--sh-text);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.sh-admin-modal textarea {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  margin-top: 7px;
+  padding: 10px 11px;
+  resize: vertical;
+  border: 1px solid rgba(49, 55, 43, 0.11);
+  border-radius: 8px;
+  outline: none;
+  background: var(--sh-body);
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 10px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.sh-admin-modal textarea::placeholder {
+  color: var(--sh-text-muted);
+  opacity: 0.7;
+}
+
+.sh-admin-modal textarea:focus {
+  border-color: rgba(176, 122, 74, 0.45);
+}
+
+.sh-admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.sh-admin-modal-cancel,
+.sh-admin-modal-reject {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 7px;
+  font-family: var(--sh-font-body);
+  font-size: 9px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.sh-admin-modal-cancel {
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  background: var(--sh-surface);
+  color: var(--sh-text);
+}
+
+.sh-admin-modal-reject {
+  border: 0;
+  background: var(--sh-primary);
+  color: var(--sh-surface);
+}
+
+.sh-admin-modal-reject:hover {
+  background: var(--sh-secondary);
+}
+
+.sh-admin-modal-reject:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.sh-admin-listing-table-scroll::-webkit-scrollbar {
+  height: 7px;
+}
+
+.sh-admin-listing-table-scroll::-webkit-scrollbar-track {
+  background: var(--sh-body);
+}
+
+.sh-admin-listing-table-scroll::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: rgba(107, 112, 92, 0.35);
+}
+
+.sh-admin-listing-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--sh-secondary);
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes sh-admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sh-spin {
+  animation: sh-admin-spin 0.8s linear infinite;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .sh-admin-listing-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sh-admin-listing-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .sh-admin-listing-search {
+    flex: 1 1 100%;
+  }
+
+  .sh-admin-filter-control {
+    flex: 1;
+  }
+}
+
+@media (max-width: 650px) {
+  .sh-admin-listings-header {
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
+
+  .sh-admin-listings-header h1 {
+    font-size: 31px;
+  }
+
+  .sh-admin-listings-header p {
+    max-width: 260px;
+    font-size: 11px;
+  }
+
+  .sh-admin-refresh-btn {
+    width: 39px;
+    min-width: 39px;
+    padding: 0;
+  }
+
+  .sh-admin-refresh-btn {
+    font-size: 0;
+  }
+
+  .sh-admin-refresh-btn svg {
+    margin: 0;
+  }
+
+  .sh-admin-listing-stats {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .sh-admin-listing-stat {
+    min-height: 68px;
+    padding: 11px;
+    gap: 8px;
+  }
+
+  .sh-admin-listing-stat-icon {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+  }
+
+  .sh-admin-listing-stat strong {
+    font-size: 16px;
+  }
+
+  .sh-admin-listing-stat span {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .sh-admin-listing-toolbar {
+    gap: 7px;
+  }
+
+  .sh-admin-filter-control {
+    min-width: 0;
+    height: 40px;
+  }
+
+  .sh-admin-listing-search {
+    height: 40px;
+    min-width: 100%;
+  }
+
+  .sh-admin-modal {
+    padding: 23px;
+  }
+}
+
+@media (max-width: 420px) {
+  .sh-admin-listing-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .sh-admin-listing-stat {
+    min-height: 62px;
+  }
+
+  .sh-admin-filter-control {
+    flex: 1 1 100%;
+  }
+}
