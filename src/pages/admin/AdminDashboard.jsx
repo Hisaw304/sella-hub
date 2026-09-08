@@ -68,8 +68,8 @@ const AdminDashboard = () => {
             .eq("status", "active")
             .gt("expired_at", new Date().toISOString());
 
-        console.log("ACTIVE SELLER PLANS:", activeSellerPlans);
-        console.log("ACTIVE SELLER ERROR:", activeSellerError);
+        // console.log("ACTIVE SELLER PLANS:", activeSellerPlans);
+        // console.log("ACTIVE SELLER ERROR:", activeSellerError);
 
         if (activeSellerError) {
           throw activeSellerError;
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
           ...new Set((activeSellerPlans || []).map((plan) => plan.user_id)),
         ];
 
-        console.log("ACTIVE SELLER IDS:", activeSellerIds);
+        // console.log("ACTIVE SELLER IDS:", activeSellerIds);
 
         const sellerCount = activeSellerIds.length;
 
