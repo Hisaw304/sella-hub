@@ -890,7 +890,7 @@ export default function AdminListings() {
                               title="View listing"
                               onClick={() =>
                                 window.open(
-                                  `/listing/${listing.slug}`,
+                                  `/admin/listings/${listing.id}`,
                                   "_blank"
                                 )
                               }
@@ -914,7 +914,7 @@ export default function AdminListings() {
                                 <button
                                   onClick={() =>
                                     window.open(
-                                      `/listing/${listing.slug}`,
+                                      `/admin/listings/${listing.id}`,
                                       "_blank"
                                     )
                                   }
