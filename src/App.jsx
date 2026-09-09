@@ -34,6 +34,9 @@ import Notifications from "./pages/Notifications";
 import AdminListings from "./pages/admin/AdminListings";
 import AdminListingReview from "./pages/admin/AdminListingReview";
 import AdminCategories from "./pages/admin/AdminCategories";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminPlans from "./pages/admin/AdminPlans";
+import AdminTransactions from "./pages/admin/AdminTransactions";
 
 const App = () => {
   const location = useLocation();
@@ -90,10 +93,10 @@ const App = () => {
             {/* Later */}
             <Route path="listings" element={<AdminListings />} />
             <Route path="listings/:id" element={<AdminListingReview />} />
-            {/* <Route path="users" element={<AdminUsers />} /> */}
+            <Route path="users" element={<AdminUsers />} />
             <Route path="categories" element={<AdminCategories />} />
-            {/* <Route path="plans" element={<AdminPlans />} /> */}
-            {/* <Route path="transactions" element={<AdminTransactions />} /> */}
+            <Route path="plans" element={<AdminPlans />} />
+            <Route path="transactions" element={<AdminTransactions />} />
             {/* <Route path="verification" element={<AdminVerification />} /> */}
             {/* <Route path="reports" element={<AdminReports />} /> */}
             {/* <Route path="settings" element={<AdminSettings />} /> */}
