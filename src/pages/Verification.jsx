@@ -73,19 +73,21 @@ export default function Verification() {
         */
 
         const { data, error: verificationError } = await supabase
-          .from("seller_verifications")
+          .from("verifications")
           .select(
             `
-              id,
-              user_id,
-              document_type,
-              status,
-              rejection_reason,
-              submitted_at,
-              reviewed_at
-            `
+      id,
+      user_id,
+      document_type,
+      status,
+      rejection_reason,
+      submitted_at,
+      reviewed_at
+    `
           )
           .eq("user_id", user.id)
+          .order("submitted_at", { ascending: false })
+          .limit(1)
           .maybeSingle();
 
         if (verificationError) {
@@ -168,6 +170,7 @@ export default function Verification() {
       setError("");
       setSuccess("");
 
+      // 1. Basic validation
       if (!form.document_type) {
         throw new Error("Please select an identification document.");
       }
@@ -186,12 +189,7 @@ export default function Verification() {
         );
       }
 
-      /*
-      ========================================
-      FILE VALIDATION
-      ========================================
-      */
-
+      // 2. File validation
       const allowedTypes = [
         "image/jpeg",
         "image/png",
@@ -209,12 +207,26 @@ export default function Verification() {
         throw new Error("The document must be smaller than 5MB.");
       }
 
-      /*
-      ========================================
-      UPLOAD DOCUMENT
-      ========================================
-      */
+      // 3. Check for existing pending verification
+      const { data: existingVerification, error: existingError } =
+        await supabase
+          .from("verifications")
+          .select("id, status")
+          .eq("user_id", user.id)
+          .eq("status", "pending")
+          .maybeSingle();
 
+      if (existingError) {
+        throw existingError;
+      }
+
+      if (existingVerification) {
+        throw new Error(
+          "You already have a verification request under review."
+        );
+      }
+
+      // 4. Upload document
       const extension = documentFile.name.split(".").pop().toLowerCase();
 
       const fileName = `${user.id}/${crypto.randomUUID()}.${extension}`;
@@ -230,14 +242,9 @@ export default function Verification() {
         throw uploadError;
       }
 
-      /*
-      ========================================
-      CREATE VERIFICATION RECORD
-      ========================================
-      */
-
+      // 5. Create verification record
       const { error: insertError } = await supabase
-        .from("seller_verifications")
+        .from("verifications")
         .insert({
           user_id: user.id,
           document_type: form.document_type,
@@ -252,6 +259,7 @@ export default function Verification() {
         throw insertError;
       }
 
+      // 6. Update UI
       setSuccess("Your verification request has been submitted successfully.");
 
       setVerification({

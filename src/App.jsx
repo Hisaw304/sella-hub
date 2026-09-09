@@ -37,6 +37,7 @@ import AdminCategories from "./pages/admin/AdminCategories";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminPlans from "./pages/admin/AdminPlans";
 import AdminTransactions from "./pages/admin/AdminTransactions";
+import AdminVerification from "./pages/admin/AdminVerification";
 
 const App = () => {
   const location = useLocation();
@@ -97,7 +98,7 @@ const App = () => {
             <Route path="categories" element={<AdminCategories />} />
             <Route path="plans" element={<AdminPlans />} />
             <Route path="transactions" element={<AdminTransactions />} />
-            {/* <Route path="verification" element={<AdminVerification />} /> */}
+            <Route path="verification" element={<AdminVerification />} />
             {/* <Route path="reports" element={<AdminReports />} /> */}
             {/* <Route path="settings" element={<AdminSettings />} /> */}
           </Route>

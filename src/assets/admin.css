@@ -9224,3 +9224,1237 @@
     transition-duration: 0.01ms !important;
   }
 }
+/* =========================================================
+   ADMIN VERIFICATION
+========================================================= */
+
+.sh-admin-verification {
+  width: 100%;
+  color: var(--sh-text);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.sh-admin-verification-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 28px;
+}
+
+.sh-admin-verification-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--sh-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.sh-admin-verification-header h1 {
+  margin: 0;
+  font-family: var(--sh-font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--sh-primary);
+}
+
+.sh-admin-verification-header p {
+  max-width: 650px;
+  margin: 12px 0 0;
+  color: var(--sh-text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.sh-admin-verification-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(49, 55, 43, 0.12);
+  border-radius: 12px;
+  background: var(--sh-surface);
+  color: var(--sh-primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.sh-admin-verification-refresh:hover:not(:disabled) {
+  border-color: rgba(49, 55, 43, 0.25);
+  background: var(--sh-body);
+  transform: translateY(-1px);
+}
+
+.sh-admin-verification-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sh-admin-verification-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  border: 1px solid rgba(166, 61, 61, 0.16);
+  border-radius: 12px;
+  background: rgba(166, 61, 61, 0.06);
+  color: #8f3838;
+  font-size: 13px;
+}
+
+.sh-admin-verification-error span {
+  flex: 1;
+}
+
+.sh-admin-verification-error button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.sh-admin-verification-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.sh-admin-verification-stat {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 16px;
+  background: var(--sh-surface);
+}
+
+.sh-admin-verification-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(49, 55, 43, 0.08);
+  color: var(--sh-primary);
+}
+
+.sh-admin-verification-stat-icon.pending {
+  background: rgba(176, 122, 74, 0.12);
+  color: var(--sh-accent);
+}
+
+.sh-admin-verification-stat-icon.approved {
+  background: rgba(73, 113, 73, 0.1);
+  color: #477247;
+}
+
+.sh-admin-verification-stat-icon.rejected {
+  background: rgba(166, 61, 61, 0.09);
+  color: #9a4040;
+}
+
+.sh-admin-verification-stat span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--sh-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sh-admin-verification-stat strong {
+  display: block;
+  color: var(--sh-primary);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.sh-admin-verification-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.sh-admin-verification-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: min(430px, 100%);
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 12px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+}
+
+.sh-admin-verification-search:focus-within {
+  border-color: rgba(176, 122, 74, 0.55);
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.08);
+}
+
+.sh-admin-verification-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.sh-admin-verification-search input::placeholder {
+  color: #9b9d95;
+}
+
+.sh-admin-verification-search button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(49, 55, 43, 0.06);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-verification-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sh-admin-verification-status-filters {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 12px;
+  background: var(--sh-surface);
+}
+
+.sh-admin-verification-status-filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sh-admin-verification-status-filters button:hover {
+  color: var(--sh-primary);
+}
+
+.sh-admin-verification-status-filters button.active {
+  background: var(--sh-primary);
+  color: #fff;
+}
+
+.sh-admin-verification-status-filters button span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 10px;
+}
+
+.sh-admin-verification-sort {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 11px;
+  outline: none;
+  background: var(--sh-surface);
+  color: var(--sh-text);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.sh-admin-verification-table-card {
+  overflow: hidden;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 18px;
+  background: var(--sh-surface);
+}
+
+.sh-admin-verification-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.sh-admin-verification-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.sh-admin-verification-table th {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.08);
+  background: rgba(250, 247, 238, 0.55);
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sh-admin-verification-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.065);
+  color: var(--sh-text);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.sh-admin-verification-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.sh-admin-verification-table tbody tr:hover {
+  background: rgba(250, 247, 238, 0.55);
+}
+
+.sh-admin-verification-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   SELLER
+========================================================= */
+
+.sh-admin-verification-seller {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.sh-admin-verification-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  max-width: 38px;
+  max-height: 38px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--sh-body);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-verification-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.sh-admin-verification-seller strong {
+  display: block;
+  max-width: 190px;
+  overflow: hidden;
+  color: var(--sh-text);
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sh-admin-verification-seller span {
+  display: block;
+  max-width: 190px;
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DOCUMENT
+========================================================= */
+
+.sh-admin-verification-document {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.sh-admin-verification-document > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-verification-document span {
+  font-weight: 600;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.sh-admin-verification-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sh-admin-verification-status.pending {
+  background: rgba(176, 122, 74, 0.1);
+  color: #9a6538;
+}
+
+.sh-admin-verification-status.approved {
+  background: rgba(73, 113, 73, 0.1);
+  color: #477247;
+}
+
+.sh-admin-verification-status.rejected {
+  background: rgba(166, 61, 61, 0.09);
+  color: #983f3f;
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.sh-admin-verification-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sh-text-muted);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.sh-admin-verification-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(49, 55, 43, 0.11);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  color: var(--sh-primary);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sh-admin-verification-view-btn:hover {
+  border-color: var(--sh-primary);
+  background: var(--sh-primary);
+  color: #fff;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.sh-admin-verification-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 13px 17px;
+  border-top: 1px solid rgba(49, 55, 43, 0.07);
+}
+
+.sh-admin-verification-pagination > span {
+  color: var(--sh-text-muted);
+  font-size: 11px;
+}
+
+.sh-admin-verification-pagination > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sh-admin-verification-pagination button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 8px;
+  background: var(--sh-surface);
+  color: var(--sh-primary);
+  cursor: pointer;
+}
+
+.sh-admin-verification-pagination button:hover:not(:disabled) {
+  background: var(--sh-body);
+}
+
+.sh-admin-verification-pagination button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.sh-admin-verification-pagination strong {
+  color: var(--sh-text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   LOADING / EMPTY
+========================================================= */
+
+.sh-admin-verification-loading,
+.sh-admin-verification-empty {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.sh-admin-verification-loading {
+  gap: 12px;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+}
+
+.sh-admin-verification-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 14px;
+  border-radius: 17px;
+  background: rgba(49, 55, 43, 0.07);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-verification-empty h3 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-size: 16px;
+}
+
+.sh-admin-verification-empty p {
+  max-width: 400px;
+  margin: 7px 0 0;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   REVIEW MODAL
+========================================================= */
+
+.sh-admin-verification-modal-overlay,
+.sh-admin-verification-reject-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: rgba(37, 41, 31, 0.58);
+  backdrop-filter: blur(8px);
+}
+
+.sh-admin-verification-modal {
+  width: min(850px, 100%);
+  max-height: calc(100vh - 50px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 22px;
+  background: var(--sh-surface);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+}
+
+.sh-admin-verification-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 23px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.08);
+}
+
+.sh-admin-verification-modal-header span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--sh-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.sh-admin-verification-modal-header h2 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.sh-admin-verification-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 10px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-verification-modal-body {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding: 22px 23px;
+}
+
+/* =========================================================
+   REVIEW SECTIONS
+========================================================= */
+
+.sh-admin-verification-review-section {
+  margin-bottom: 22px;
+}
+
+.sh-admin-verification-review-section:last-child {
+  margin-bottom: 0;
+}
+
+.sh-admin-verification-review-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  color: var(--sh-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sh-admin-verification-review-heading svg {
+  color: var(--sh-accent);
+}
+
+/* =========================================================
+   REVIEW SELLER
+========================================================= */
+
+.sh-admin-verification-review-seller {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 13px;
+  background: var(--sh-body);
+}
+
+.sh-admin-verification-review-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  min-height: 46px;
+  max-width: 46px;
+  max-height: 46px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--sh-surface);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-verification-review-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.sh-admin-verification-review-seller strong {
+  display: block;
+  color: var(--sh-primary);
+  font-size: 13px;
+}
+
+.sh-admin-verification-review-seller span {
+  display: block;
+  margin-top: 3px;
+  color: var(--sh-text-muted);
+  font-size: 11px;
+}
+
+/* =========================================================
+   DETAIL GRID
+========================================================= */
+
+.sh-admin-verification-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sh-admin-verification-detail-grid > div {
+  padding: 13px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 12px;
+  background: var(--sh-body);
+}
+
+.sh-admin-verification-detail-grid span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+}
+
+.sh-admin-verification-detail-grid strong {
+  display: block;
+  color: var(--sh-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   DOCUMENT PREVIEW
+========================================================= */
+
+.sh-admin-verification-document-preview {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 15px;
+  background: var(--sh-body);
+}
+
+.sh-admin-verification-document-preview > img {
+  width: 100%;
+  max-height: 480px;
+  display: block;
+  object-fit: contain;
+}
+
+.sh-admin-verification-document-loading,
+.sh-admin-verification-document-missing {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.sh-admin-verification-document-missing {
+  color: #983f3f;
+}
+
+.sh-admin-verification-pdf {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 35px;
+  color: var(--sh-primary);
+  text-align: center;
+}
+
+.sh-admin-verification-pdf > svg {
+  color: var(--sh-accent);
+}
+
+.sh-admin-verification-pdf strong {
+  font-size: 14px;
+}
+
+.sh-admin-verification-pdf span {
+  max-width: 350px;
+  color: var(--sh-text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.sh-admin-verification-open-document {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  margin-top: 5px;
+  padding: 0 13px;
+  border-radius: 9px;
+  background: var(--sh-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* =========================================================
+   CURRENT STATUS
+========================================================= */
+
+.sh-admin-verification-current-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 13px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 12px;
+  background: var(--sh-body);
+}
+
+.sh-admin-verification-current-status > span:last-child {
+  color: var(--sh-text-muted);
+  font-size: 10px;
+}
+
+.sh-admin-verification-rejection {
+  margin-top: 10px;
+  padding: 13px;
+  border-left: 3px solid #a13f3f;
+  border-radius: 0 10px 10px 0;
+  background: rgba(166, 61, 61, 0.06);
+}
+
+.sh-admin-verification-rejection strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #8f3838;
+  font-size: 11px;
+}
+
+.sh-admin-verification-rejection p {
+  margin: 0;
+  color: #6e4747;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.sh-admin-verification-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 23px;
+  border-top: 1px solid rgba(49, 55, 43, 0.08);
+  background: rgba(250, 247, 238, 0.45);
+}
+
+.sh-admin-verification-reject-btn,
+.sh-admin-verification-approve-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 15px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sh-admin-verification-reject-btn {
+  border: 1px solid rgba(166, 61, 61, 0.2);
+  background: rgba(166, 61, 61, 0.06);
+  color: #983f3f;
+}
+
+.sh-admin-verification-reject-btn:hover:not(:disabled) {
+  background: rgba(166, 61, 61, 0.11);
+}
+
+.sh-admin-verification-approve-btn {
+  border: 1px solid var(--sh-primary);
+  background: var(--sh-primary);
+  color: #fff;
+}
+
+.sh-admin-verification-approve-btn:hover:not(:disabled) {
+  background: #252b21;
+  transform: translateY(-1px);
+}
+
+.sh-admin-verification-reject-btn:disabled,
+.sh-admin-verification-approve-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   REJECTION MODAL
+========================================================= */
+
+.sh-admin-verification-reject-overlay {
+  z-index: 1100;
+}
+
+.sh-admin-verification-reject-modal {
+  width: min(470px, 100%);
+  padding: 23px;
+  border-radius: 18px;
+  background: var(--sh-surface);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+}
+
+.sh-admin-verification-reject-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sh-admin-verification-reject-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(166, 61, 61, 0.09);
+  color: #983f3f;
+}
+
+.sh-admin-verification-reject-header > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-verification-reject-modal h3 {
+  margin: 18px 0 7px;
+  color: var(--sh-primary);
+  font-size: 18px;
+}
+
+.sh-admin-verification-reject-modal > p {
+  margin: 0 0 18px;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.sh-admin-verification-reject-modal label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--sh-text);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sh-admin-verification-reject-modal textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid rgba(49, 55, 43, 0.12);
+  border-radius: 11px;
+  outline: none;
+  background: var(--sh-body);
+  color: var(--sh-text);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.sh-admin-verification-reject-modal textarea:focus {
+  border-color: rgba(176, 122, 74, 0.55);
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.08);
+}
+
+.sh-admin-verification-reject-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.sh-admin-verification-reject-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sh-admin-verification-reject-actions button:first-child {
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  background: var(--sh-surface);
+  color: var(--sh-text);
+}
+
+.sh-admin-verification-reject-actions button:last-child {
+  border: 1px solid #983f3f;
+  background: #983f3f;
+  color: #fff;
+}
+
+.sh-admin-verification-reject-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.sh-admin-verification-spin {
+  animation: sh-admin-verification-spin 0.8s linear infinite;
+}
+
+@keyframes sh-admin-verification-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .sh-admin-verification-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sh-admin-verification-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sh-admin-verification-search {
+    width: 100%;
+  }
+
+  .sh-admin-verification-filters {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 700px) {
+  .sh-admin-verification-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .sh-admin-verification-refresh {
+    align-self: flex-start;
+  }
+
+  .sh-admin-verification-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sh-admin-verification-filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sh-admin-verification-status-filters {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .sh-admin-verification-status-filters button {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .sh-admin-verification-sort {
+    width: 100%;
+  }
+
+  .sh-admin-verification-modal-overlay,
+  .sh-admin-verification-reject-overlay {
+    padding: 12px;
+  }
+
+  .sh-admin-verification-modal {
+    max-height: calc(100vh - 24px);
+    border-radius: 17px;
+  }
+
+  .sh-admin-verification-modal-header {
+    padding: 17px;
+  }
+
+  .sh-admin-verification-modal-body {
+    max-height: calc(100vh - 165px);
+    padding: 17px;
+  }
+
+  .sh-admin-verification-modal-footer {
+    padding: 13px 17px;
+    flex-direction: column-reverse;
+  }
+
+  .sh-admin-verification-reject-btn,
+  .sh-admin-verification-approve-btn {
+    width: 100%;
+  }
+
+  .sh-admin-verification-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sh-admin-verification-current-status {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sh-admin-verification-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .sh-admin-verification-header h1 {
+    font-size: 34px;
+  }
+
+  .sh-admin-verification-pagination {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sh-admin-verification-pagination > div {
+    align-self: flex-end;
+  }
+
+  .sh-admin-verification-reject-modal {
+    padding: 18px;
+  }
+}
