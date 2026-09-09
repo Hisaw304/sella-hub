@@ -41,7 +41,8 @@ export default function Categories() {
         const { data, error } = await supabase
           .from("categories")
           .select("*")
-          .order("name", { ascending: true })
+          .eq("is_active", true)
+          .order("sort_order", { ascending: true })
           .limit(6);
 
         if (error) {

@@ -3820,3 +3820,1246 @@
     height: 64px;
   }
 }
+/* =========================================================
+   SELLHUB ADMIN — CATEGORIES
+========================================================= */
+
+.sh-admin-categories {
+  min-height: 100vh;
+  padding: 42px 42px 70px;
+  background: var(--sh-body);
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.sh-admin-categories-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 34px;
+}
+
+.sh-admin-categories-header > div:first-child {
+  max-width: 700px;
+}
+
+.sh-admin-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--sh-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.sh-admin-categories-header h1 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.sh-admin-categories-header p {
+  max-width: 570px;
+  margin: 15px 0 0;
+  color: var(--sh-text-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.sh-admin-primary-btn,
+.sh-admin-secondary-btn,
+.sh-admin-danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sh-admin-primary-btn {
+  background: var(--sh-primary);
+  color: var(--sh-surface);
+  box-shadow: 0 8px 20px rgba(49, 55, 43, 0.12);
+}
+
+.sh-admin-primary-btn:hover:not(:disabled) {
+  background: var(--sh-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(49, 55, 43, 0.16);
+}
+
+.sh-admin-secondary-btn {
+  background: var(--sh-surface);
+  border-color: rgba(49, 55, 43, 0.14);
+  color: var(--sh-text);
+}
+
+.sh-admin-secondary-btn:hover:not(:disabled) {
+  border-color: var(--sh-secondary);
+  background: var(--sh-body);
+}
+
+.sh-admin-danger-btn {
+  background: #9b3d35;
+  color: #fff;
+}
+
+.sh-admin-danger-btn:hover:not(:disabled) {
+  background: #7e302b;
+  transform: translateY(-1px);
+}
+
+.sh-admin-primary-btn:disabled,
+.sh-admin-secondary-btn:disabled,
+.sh-admin-danger-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sh-admin-category-error {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 24px;
+  padding: 13px 15px;
+  border: 1px solid rgba(155, 61, 53, 0.18);
+  border-radius: 10px;
+  background: rgba(155, 61, 53, 0.06);
+  color: #8b3731;
+  font-size: 13px;
+}
+
+.sh-admin-category-error > span {
+  flex: 1;
+}
+
+.sh-admin-category-error > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sh-admin-category-error > button:hover {
+  background: rgba(155, 61, 53, 0.09);
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.sh-admin-category-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.sh-admin-category-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 94px;
+  padding: 18px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 12px;
+  background: var(--sh-surface);
+  box-shadow: 0 5px 18px rgba(49, 55, 43, 0.035);
+}
+
+.sh-admin-category-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(176, 122, 74, 0.1);
+  color: var(--sh-accent);
+}
+
+.sh-admin-category-stat span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--sh-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sh-admin-category-stat strong {
+  display: block;
+  color: var(--sh-primary);
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.sh-admin-category-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.sh-admin-category-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(100%, 370px);
+  height: 45px;
+  border: 1px solid rgba(49, 55, 43, 0.12);
+  border-radius: 8px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sh-admin-category-search:focus-within {
+  border-color: var(--sh-accent);
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.09);
+}
+
+.sh-admin-category-search > svg {
+  flex-shrink: 0;
+  margin-left: 14px;
+}
+
+.sh-admin-category-search input {
+  width: 100%;
+  height: 100%;
+  padding: 0 38px 0 10px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+}
+
+.sh-admin-category-search input::placeholder {
+  color: #9a9d94;
+}
+
+.sh-admin-category-search > button {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  cursor: pointer;
+}
+
+.sh-admin-category-search > button:hover {
+  background: var(--sh-body);
+  color: var(--sh-text);
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.sh-admin-category-filters {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.sh-admin-category-filters button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  font-family: var(--sh-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sh-admin-category-filters button:hover {
+  color: var(--sh-text);
+}
+
+.sh-admin-category-filters button.active {
+  background: var(--sh-primary);
+  color: var(--sh-surface);
+}
+
+/* =========================================================
+   CATEGORY CARD / TABLE CONTAINER
+========================================================= */
+
+.sh-admin-category-card {
+  overflow: visible;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 13px;
+  background: var(--sh-surface);
+  box-shadow: 0 8px 28px rgba(49, 55, 43, 0.04);
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.sh-admin-category-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 320px;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+}
+
+.sh-spin {
+  animation: sh-admin-spin 0.85s linear infinite;
+}
+
+@keyframes sh-admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.sh-admin-category-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+  padding: 50px 25px;
+  text-align: center;
+}
+
+.sh-admin-category-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 17px;
+  border-radius: 14px;
+  background: rgba(107, 112, 92, 0.1);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-category-empty h3 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.sh-admin-category-empty p {
+  max-width: 350px;
+  margin: 8px 0 20px;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.sh-admin-category-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: inherit;
+}
+
+.sh-admin-category-table {
+  width: 100%;
+  min-width: 930px;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.sh-admin-category-table thead {
+  background: #f7f5ed;
+}
+
+.sh-admin-category-table th {
+  padding: 13px 17px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.09);
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sh-admin-category-table td {
+  padding: 15px 17px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.065);
+  vertical-align: middle;
+}
+
+.sh-admin-category-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.sh-admin-category-table tbody tr:hover {
+  background: #fcfbf7;
+}
+
+.sh-admin-category-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   CATEGORY NAME
+========================================================= */
+
+.sh-admin-category-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 205px;
+}
+
+.sh-admin-category-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border: 1px solid rgba(49, 55, 43, 0.08);
+  border-radius: 9px;
+  background: var(--sh-body);
+  color: var(--sh-secondary);
+}
+
+.sh-admin-category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sh-admin-category-name strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--sh-text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.sh-admin-category-name span {
+  display: block;
+  color: var(--sh-text-muted);
+  font-family: monospace;
+  font-size: 10px;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.sh-admin-category-description {
+  width: 250px;
+  max-width: 250px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--sh-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   LISTING COUNT
+========================================================= */
+
+.sh-admin-category-listing-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 27px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: rgba(49, 55, 43, 0.06);
+  color: var(--sh-text);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+/* =========================================================
+   SORT ORDER
+========================================================= */
+
+.sh-admin-category-order {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sh-admin-category-order > span {
+  min-width: 18px;
+  color: var(--sh-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sh-admin-sort-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sh-admin-sort-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 4px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sh-admin-sort-buttons button:hover:not(:disabled) {
+  border-color: var(--sh-secondary);
+  background: var(--sh-body);
+  color: var(--sh-primary);
+}
+
+.sh-admin-sort-buttons button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.sh-admin-category-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 27px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sh-admin-category-status.active {
+  background: rgba(74, 112, 74, 0.1);
+  color: #4d754d;
+}
+
+.sh-admin-category-status.inactive {
+  background: rgba(115, 119, 108, 0.11);
+  color: var(--sh-text-muted);
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.sh-admin-category-date {
+  color: var(--sh-text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ACTION MENU
+========================================================= */
+
+.sh-admin-category-actions {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sh-admin-category-menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--sh-text-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.sh-admin-category-menu-trigger:hover {
+  border-color: rgba(49, 55, 43, 0.09);
+  background: var(--sh-body);
+  color: var(--sh-text);
+}
+
+.sh-admin-category-menu {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 7px);
+  right: 0;
+  width: 185px;
+  padding: 6px;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 9px;
+  background: var(--sh-surface);
+  box-shadow: 0 16px 40px rgba(49, 55, 43, 0.13);
+}
+
+.sh-admin-category-menu button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sh-admin-category-menu button:hover {
+  background: var(--sh-body);
+}
+
+.sh-admin-category-menu button.danger {
+  color: #9b3d35;
+}
+
+.sh-admin-category-menu button.danger:hover {
+  background: rgba(155, 61, 53, 0.06);
+}
+
+.sh-admin-category-menu-divider {
+  height: 1px;
+  margin: 5px 4px;
+  background: rgba(49, 55, 43, 0.08);
+}
+
+/* =========================================================
+   MODAL BACKDROP
+========================================================= */
+
+.sh-admin-modal-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: rgba(37, 41, 31, 0.52);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+/* =========================================================
+   ADD / EDIT MODAL
+========================================================= */
+
+.sh-admin-category-modal {
+  width: min(100%, 650px);
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 15px;
+  background: var(--sh-surface);
+  box-shadow: 0 25px 70px rgba(37, 41, 31, 0.2);
+}
+
+.sh-admin-category-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 25px 27px 20px;
+  border-bottom: 1px solid rgba(49, 55, 43, 0.08);
+}
+
+.sh-admin-category-modal-header h2 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.sh-admin-category-modal-header > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 7px;
+  background: var(--sh-body);
+  color: var(--sh-text-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sh-admin-category-modal-header > button:hover:not(:disabled) {
+  background: var(--sh-primary);
+  color: var(--sh-surface);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.sh-admin-category-modal form {
+  padding: 24px 27px 27px;
+}
+
+.sh-admin-category-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 17px;
+}
+
+.sh-admin-form-field {
+  margin-bottom: 17px;
+}
+
+.sh-admin-category-form-grid .sh-admin-form-field {
+  margin-bottom: 0;
+}
+
+.sh-admin-form-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--sh-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.sh-admin-form-field label span {
+  color: var(--sh-accent);
+}
+
+.sh-admin-form-field input,
+.sh-admin-form-field textarea {
+  width: 100%;
+  border: 1px solid rgba(49, 55, 43, 0.13);
+  border-radius: 8px;
+  outline: none;
+  background: var(--sh-surface);
+  color: var(--sh-text);
+  font-family: var(--sh-font-body);
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.sh-admin-form-field input {
+  height: 43px;
+  padding: 0 12px;
+}
+
+.sh-admin-form-field textarea {
+  min-height: 105px;
+  padding: 11px 12px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.sh-admin-form-field input::placeholder,
+.sh-admin-form-field textarea::placeholder {
+  color: #a0a39b;
+}
+
+.sh-admin-form-field input:focus,
+.sh-admin-form-field textarea:focus {
+  border-color: var(--sh-accent);
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.09);
+}
+
+.sh-admin-form-field small {
+  display: block;
+  margin-top: 7px;
+  color: var(--sh-text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   IMAGE INPUT
+========================================================= */
+
+.sh-admin-image-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(49, 55, 43, 0.13);
+  border-radius: 8px;
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sh-admin-image-input:focus-within {
+  border-color: var(--sh-accent);
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.09);
+}
+
+.sh-admin-image-input > svg {
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.sh-admin-image-input input {
+  border: 0;
+  box-shadow: none;
+}
+
+.sh-admin-image-input input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+.sh-admin-category-image-preview {
+  width: 100%;
+  height: 170px;
+  margin: -2px 0 19px;
+  overflow: hidden;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 10px;
+  background: var(--sh-body);
+}
+
+.sh-admin-category-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.sh-admin-category-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 5px 0 4px;
+  cursor: pointer;
+}
+
+.sh-admin-category-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sh-admin-toggle-ui {
+  position: relative;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d7d9d2;
+  transition: background 0.2s ease;
+}
+
+.sh-admin-toggle-ui::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--sh-surface);
+  box-shadow: 0 2px 5px rgba(37, 41, 31, 0.18);
+  content: "";
+  transition: transform 0.2s ease;
+}
+
+.sh-admin-category-toggle input:checked + .sh-admin-toggle-ui {
+  background: var(--sh-primary);
+}
+
+.sh-admin-category-toggle input:checked + .sh-admin-toggle-ui::after {
+  transform: translateX(18px);
+}
+
+.sh-admin-category-toggle input:focus-visible + .sh-admin-toggle-ui {
+  box-shadow: 0 0 0 3px rgba(176, 122, 74, 0.15);
+}
+
+.sh-admin-category-toggle > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sh-admin-category-toggle strong {
+  color: var(--sh-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.sh-admin-category-toggle small {
+  color: var(--sh-text-muted);
+  font-size: 10px;
+}
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.sh-admin-category-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 25px;
+  padding-top: 19px;
+  border-top: 1px solid rgba(49, 55, 43, 0.08);
+}
+
+/* =========================================================
+   DELETE MODAL
+========================================================= */
+
+.sh-admin-delete-modal {
+  width: min(100%, 470px);
+  padding: 30px;
+  border: 1px solid rgba(49, 55, 43, 0.09);
+  border-radius: 15px;
+  background: var(--sh-surface);
+  box-shadow: 0 25px 70px rgba(37, 41, 31, 0.2);
+}
+
+.sh-admin-delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 19px;
+  border-radius: 11px;
+  background: rgba(155, 61, 53, 0.09);
+  color: #9b3d35;
+}
+
+.sh-admin-delete-modal h2 {
+  margin: 0;
+  color: var(--sh-primary);
+  font-family: var(--sh-font-display);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.sh-admin-delete-modal > p {
+  margin: 10px 0 18px;
+  color: var(--sh-text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.sh-admin-delete-modal > p strong {
+  color: var(--sh-text);
+  font-weight: 650;
+}
+
+.sh-admin-delete-warning {
+  margin-bottom: 20px;
+  padding: 13px 14px;
+  border: 1px solid rgba(176, 122, 74, 0.18);
+  border-radius: 8px;
+  background: rgba(176, 122, 74, 0.07);
+  color: #765536;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.sh-admin-delete-warning strong {
+  color: var(--sh-text);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .sh-admin-categories {
+    padding: 35px 28px 60px;
+  }
+
+  .sh-admin-category-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sh-admin-categories-header h1 {
+    font-size: 54px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .sh-admin-categories {
+    padding: 27px 17px 50px;
+  }
+
+  .sh-admin-categories-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 27px;
+  }
+
+  .sh-admin-categories-header h1 {
+    font-size: 46px;
+  }
+
+  .sh-admin-categories-header p {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .sh-admin-categories-header .sh-admin-primary-btn {
+    width: 100%;
+  }
+
+  .sh-admin-category-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+    margin-bottom: 21px;
+  }
+
+  .sh-admin-category-stat {
+    min-height: 82px;
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .sh-admin-category-stat-icon {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .sh-admin-category-stat-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sh-admin-category-stat span {
+    font-size: 9px;
+  }
+
+  .sh-admin-category-stat strong {
+    font-size: 19px;
+  }
+
+  .sh-admin-category-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .sh-admin-category-search {
+    width: 100%;
+  }
+
+  .sh-admin-category-filters {
+    width: 100%;
+  }
+
+  .sh-admin-category-filters button {
+    flex: 1;
+    padding: 0 8px;
+  }
+
+  .sh-admin-category-card {
+    border-radius: 10px;
+  }
+
+  .sh-admin-category-table {
+    min-width: 900px;
+  }
+
+  .sh-admin-modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .sh-admin-category-modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 17px 17px 0 0;
+  }
+
+  .sh-admin-category-modal-header {
+    padding: 21px 19px 17px;
+  }
+
+  .sh-admin-category-modal-header h2 {
+    font-size: 29px;
+  }
+
+  .sh-admin-category-modal form {
+    padding: 20px 19px 24px;
+  }
+
+  .sh-admin-category-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .sh-admin-category-form-grid .sh-admin-form-field {
+    margin-bottom: 17px;
+  }
+
+  .sh-admin-category-modal-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .sh-admin-category-modal-footer button {
+    width: 100%;
+  }
+
+  .sh-admin-delete-modal {
+    width: 100%;
+    padding: 25px 20px 22px;
+    border-radius: 17px 17px 0 0;
+  }
+
+  .sh-admin-delete-modal h2 {
+    font-size: 31px;
+  }
+
+  .sh-admin-delete-modal .sh-admin-category-modal-footer {
+    margin-top: 22px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+  .sh-admin-categories {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .sh-admin-categories-header h1 {
+    font-size: 41px;
+  }
+
+  .sh-admin-category-stats {
+    gap: 7px;
+  }
+
+  .sh-admin-category-stat {
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .sh-admin-category-stat-icon {
+    display: none;
+  }
+
+  .sh-admin-category-stat strong {
+    font-size: 18px;
+  }
+
+  .sh-admin-category-filters button {
+    font-size: 11px;
+  }
+}
