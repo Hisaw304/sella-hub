@@ -242,6 +242,12 @@ export default function Verification() {
         throw uploadError;
       }
 
+      const { data: publicUrlData } = supabase.storage
+        .from("verification-documents")
+        .getPublicUrl(fileName);
+
+      const documentUrl = publicUrlData?.publicUrl;
+
       // 5. Create verification record
       const { error: insertError } = await supabase
         .from("verifications")
@@ -251,6 +257,7 @@ export default function Verification() {
           document_number: form.document_number.trim(),
           date_of_birth: form.date_of_birth,
           document_path: fileName,
+          document_url: documentUrl,
           status: "pending",
           submitted_at: new Date().toISOString(),
         });

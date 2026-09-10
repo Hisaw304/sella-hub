@@ -10061,3 +10061,125 @@ body {
     transition: none;
   }
 }
+.sh-maintenance {
+  min-height: 100vh;
+  background: var(--sh-body);
+  color: var(--sh-text);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.sh-maintenance-content {
+  width: 100%;
+  max-width: 680px;
+}
+
+.sh-maintenance-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(49, 55, 43, 0.08);
+  color: var(--sh-primary);
+
+  border: 1px solid rgba(49, 55, 43, 0.1);
+}
+
+.sh-maintenance-eyebrow {
+  display: block;
+
+  margin-bottom: 18px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+
+  color: var(--sh-secondary);
+}
+
+.sh-maintenance h1 {
+  margin: 0;
+
+  font-family: var(--sh-font-display);
+  font-size: clamp(54px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+
+  color: var(--sh-primary);
+}
+
+.sh-maintenance p {
+  max-width: 540px;
+  margin: 30px auto 0;
+
+  font-family: var(--sh-font-body);
+  font-size: 17px;
+  line-height: 1.7;
+
+  color: var(--sh-text-muted);
+}
+
+.sh-maintenance-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 34px;
+  padding: 11px 16px;
+
+  border: 1px solid rgba(49, 55, 43, 0.1);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sh-secondary);
+}
+
+.sh-maintenance-status span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: var(--sh-accent);
+
+  box-shadow: 0 0 0 4px rgba(176, 122, 74, 0.1);
+}
+
+@media (max-width: 600px) {
+  .sh-maintenance {
+    padding: 32px 20px;
+  }
+
+  .sh-maintenance-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+  }
+
+  .sh-maintenance h1 {
+    font-size: 56px;
+  }
+
+  .sh-maintenance p {
+    font-size: 15px;
+    margin-top: 24px;
+  }
+
+  .sh-maintenance-status {
+    margin-top: 28px;
+  }
+}
