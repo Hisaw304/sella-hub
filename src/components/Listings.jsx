@@ -12,7 +12,7 @@ import {
 import { supabase } from "../lib/supabase";
 
 const Listings = () => {
-  const [listings, setListings] = useState([]);
+  const [categoryRows, setCategoryRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -22,35 +22,54 @@ const Listings = () => {
         setLoading(true);
         setError("");
 
+        /*
+        ========================================
+        GET CATEGORIES
+        ========================================
+        */
+
+        const { data: categories, error: categoriesError } = await supabase
+          .from("categories")
+          .select("id, name, slug")
+          .order("name", { ascending: true });
+
+        if (categoriesError) {
+          throw categoriesError;
+        }
+
+        if (!categories || categories.length === 0) {
+          setCategoryRows([]);
+          return;
+        }
+
         const { data: listingData, error: listingError } = await supabase
           .from("listings")
           .select(
             `
-          *,
-          categories (
-            id,
-            name
-          )
-        `
+                *,
+                categories (
+                  id,
+                  name
+                )
+              `
           )
           .eq("status", "published")
-          .order("created_at", { ascending: false })
-          .limit(9);
+          .order("created_at", { ascending: false });
 
         if (listingError) {
           throw listingError;
         }
 
         if (!listingData || listingData.length === 0) {
-          setListings([]);
+          setCategoryRows([]);
           return;
         }
 
         /*
-      ========================================
-      GET SELLER PROFILES
-      ========================================
-      */
+        ========================================
+        GET SELLER PROFILES
+        ========================================
+        */
 
         const userIds = [
           ...new Set(
@@ -74,20 +93,58 @@ const Listings = () => {
         }
 
         /*
-      ========================================
-      ATTACH SELLER PROFILE
-      ========================================
-      */
+        ========================================
+        ATTACH SELLER PROFILE
+        ========================================
+        */
 
         const listingsWithProfiles = listingData.map((listing) => ({
           ...listing,
+
           profiles:
             profiles.find((profile) => profile.id === listing.user_id) || null,
         }));
 
-        setListings(listingsWithProfiles);
+        /*
+        ========================================
+        BUILD CATEGORY ROWS
+        ========================================
+
+        Each category receives ONLY its newest
+        10 published listings.
+
+        The 11th position is reserved for the
+        "View all [Category]" card in the JSX.
+
+        IMPORTANT:
+
+        If a category has 25 listings in the
+        database, only the newest 10 appear
+        on this homepage row.
+
+        The remaining listings still exist and
+        remain accessible through Browse/Search.
+        */
+
+        const rows = categories
+          .map((category) => {
+            const categoryListings = listingsWithProfiles
+              .filter((listing) => listing.category_id === category.id)
+              .slice(0, 10);
+
+            return {
+              id: category.id,
+              name: category.name,
+              slug: category.slug,
+              listings: categoryListings,
+            };
+          })
+          .filter((category) => category.listings.length > 0);
+
+        setCategoryRows(rows);
       } catch (err) {
         console.error("Listings error:", err);
+
         setError("Unable to load listings.");
       } finally {
         setLoading(false);
@@ -97,8 +154,16 @@ const Listings = () => {
     fetchListings();
   }, []);
 
+  /*
+  ========================================
+  FORMAT PRICE
+  ========================================
+  */
+
   const formatPrice = (listing) => {
-    if (!listing) return "Price unavailable";
+    if (!listing) {
+      return "Price unavailable";
+    }
 
     if (
       listing.price === null ||
@@ -171,7 +236,9 @@ const Listings = () => {
   return (
     <section className="sh-featured">
       <div className="sh-featured-container">
-        {/* HEADER */}
+        {/* ========================================
+            MAIN HEADER
+        ======================================== */}
 
         <div className="sh-featured-header">
           <div className="sh-featured-heading">
@@ -189,9 +256,11 @@ const Listings = () => {
           </Link>
         </div>
 
-        {/* EMPTY */}
+        {/* ========================================
+            EMPTY STATE
+        ======================================== */}
 
-        {listings.length === 0 ? (
+        {categoryRows.length === 0 ? (
           <div className="sh-featured-empty">
             <div className="sh-featured-empty-icon">
               <Package size={23} />
@@ -202,35 +271,76 @@ const Listings = () => {
             <p>New products and services from sellers will appear here.</p>
           </div>
         ) : (
-          <div className="sh-listings-grid">
-            {listings.map((listing) => {
-              const category = listing.categories?.name || "Marketplace";
+          /*
+          ========================================
+          CATEGORY ROWS
+          ========================================
+          */
 
-              const seller = listing.profiles?.full_name || "SellaHub seller";
+          <div className="sh-category-rows">
+            {categoryRows.map((category) => (
+              <section className="sh-category-row" key={category.id}>
+                {/* ========================================
+                    CATEGORY TITLE
+                ======================================== */}
 
-              const verified = Boolean(listing.verified);
+                <div className="sh-category-row-header">
+                  <div className="sh-category-row-title">
+                    <h3>{category.name}</h3>
+                  </div>
+                </div>
 
-              /*
-              ========================================
-              IMAGE
-              ========================================
+                {/* ========================================
+                    HORIZONTAL LISTINGS
+                ======================================== */}
 
-              Your listings table does not contain an image
-              column, so don't try to read listing.image_url.
-              Images should come from listing_images.
-              */
+                <div className="sh-category-scroll">
+                  <div className="sh-category-track">
+                    {/* ========================================
+                        MAXIMUM 10 LISTINGS
+                    ======================================== */}
 
-              return (
-                <ListingCard
-                  key={listing.id}
-                  listing={listing}
-                  category={category}
-                  seller={seller}
-                  verified={verified}
-                  formatPrice={formatPrice}
-                />
-              );
-            })}
+                    {category.listings.map((listing) => {
+                      const listingCategory =
+                        listing.categories?.name ||
+                        category.name ||
+                        "Marketplace";
+
+                      const seller =
+                        listing.profiles?.full_name || "SellaHub seller";
+
+                      const verified = Boolean(listing.verified);
+
+                      return (
+                        <ListingCard
+                          key={listing.id}
+                          listing={listing}
+                          category={listingCategory}
+                          seller={seller}
+                          verified={verified}
+                          formatPrice={formatPrice}
+                        />
+                      );
+                    })}
+
+                    {/* ========================================
+                        11TH CARD — VIEW ALL CATEGORY
+                    ======================================== */}
+
+                    <Link
+                      to={`/browse?category=${category.id}`}
+                      className="sh-category-view-card"
+                      aria-label={`View all ${category.name} listings`}
+                    >
+                      <div className="sh-category-view-card-inner">
+                        <span>View all {category.name}</span>
+                        <ArrowUpRight size={21} />
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </section>
+            ))}
           </div>
         )}
       </div>
@@ -253,7 +363,9 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
         .from("listing_images")
         .select("*")
         .eq("listing_id", listing.id)
-        .order("created_at", { ascending: true })
+        .order("created_at", {
+          ascending: true,
+        })
         .limit(1)
         .maybeSingle();
 
@@ -267,12 +379,19 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
 
   return (
     <article className="sh-listing-card">
-      {/* IMAGE */}
+      {/* ========================================
+          IMAGE
+      ======================================== */}
 
       <Link to={`/listing/${listing.slug}`} className="sh-listing-image-link">
         <div className="sh-listing-image-wrap">
           {image ? (
-            <img src={image} alt={listing.title} className="sh-listing-image" />
+            <img
+              src={image}
+              alt={listing.title}
+              className="sh-listing-image"
+              loading="lazy"
+            />
           ) : (
             <div className="sh-listing-no-image">
               <Package size={30} />
@@ -295,7 +414,9 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
         </div>
       </Link>
 
-      {/* CONTENT */}
+      {/* ========================================
+          CONTENT
+      ======================================== */}
 
       <div className="sh-listing-content">
         <div className="sh-listing-title-row">
@@ -304,15 +425,21 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
           {verified && <BadgeCheck className="sh-verified-icon" size={17} />}
         </div>
 
+        {/* ========================================
+            PRICE
+        ======================================== */}
+
         <div className="sh-listing-price">
           {listing.price_type === "starting_from" ? (
             <>
-              <span className="sh-price-prefix">From</span>{" "}
+              <span className="sh-price-prefix">From</span>
+
               {formatPrice(listing)}
             </>
           ) : listing.price_type === "negotiable" ? (
             <>
               {formatPrice(listing)}
+
               <span className="sh-price-type">Negotiable</span>
             </>
           ) : listing.price_type === "free" ? (
@@ -324,9 +451,14 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
           )}
         </div>
 
+        {/* ========================================
+            META
+        ======================================== */}
+
         <div className="sh-listing-meta">
           <span>
             <MapPin size={14} />
+
             {listing.location || "Location not specified"}
           </span>
 

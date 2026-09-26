@@ -254,12 +254,11 @@ export default function BrowseListings() {
             listingData.map((listing) => listing.user_id).filter(Boolean)
           ),
         ];
-
         /*
-      ========================================
-      GET ACTIVE SELLER PLANS
-      ========================================
-      */
+========================================
+GET ACTIVE SELLER PLANS
+========================================
+*/
 
         let activePlans = [];
 
@@ -268,10 +267,10 @@ export default function BrowseListings() {
             .from("user_plans")
             .select(
               `
-            user_id,
-            status,
-            expired_at
-          `
+      user_id,
+      status,
+      expired_at
+    `
             )
             .in("user_id", userIds)
             .eq("status", "active")
@@ -285,18 +284,18 @@ export default function BrowseListings() {
         }
 
         /*
-      ========================================
-      ACTIVE SELLER IDS
-      ========================================
-      */
+========================================
+ACTIVE SELLER IDS
+========================================
+*/
 
         const activeUserIds = new Set(activePlans.map((plan) => plan.user_id));
 
         /*
-      ========================================
-      REMOVE LISTINGS FROM EXPIRED SELLERS
-      ========================================
-      */
+========================================
+REMOVE LISTINGS FROM EXPIRED SELLERS
+========================================
+*/
 
         const activeListings = listingData.filter((listing) =>
           activeUserIds.has(listing.user_id)
@@ -308,7 +307,7 @@ export default function BrowseListings() {
       ========================================
       */
 
-        const formattedListings = activeListings.map((listing) => ({
+        const formattedListings = listingData.map((listing) => ({
           ...listing,
 
           listing_images: [...(listing.listing_images || [])].sort(

@@ -1100,67 +1100,52 @@ body {
 ======================================== */
 
 @media (max-width: 480px) {
-  .sh-hero-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .sh-hero-primary,
-  .sh-hero-secondary {
-    width: 100%;
-  }
-
   .sh-hero-visual {
-    min-height: 330px;
+    position: relative;
+    overflow: visible !important;
+    z-index: 5;
   }
 
+  /* Keep the rounded image */
   .sh-hero-image-wrap {
-    height: 330px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden !important;
+    border-radius: 20px;
   }
 
   .sh-floating-card {
-    padding: 9px 11px;
-  }
-
-  .sh-floating-card strong {
-    font-size: 10px;
-  }
-
-  .sh-floating-card span {
-    font-size: 9px;
-  }
-
-  .sh-floating-icon {
-    width: 29px;
-    height: 29px;
+    position: absolute !important;
+    z-index: 20 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .sh-floating-card-top {
-    top: 15px;
-    left: -5px;
+    top: 15px !important;
+    left: 8px !important;
   }
 
   .sh-floating-card-bottom {
-    right: -5px;
-    bottom: 15px;
+    right: 8px !important;
+    bottom: 15px !important;
   }
 
-  .sh-hero-stats {
-    min-height: 90px;
-  }
-
-  .sh-stat strong {
-    font-size: 17px;
-  }
-
-  .sh-stat span {
-    font-size: 9px;
-  }
-
-  .sh-stat-divider {
-    height: 28px;
+  .sh-floating-icon {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-shrink: 0;
+    width: 29px;
+    height: 29px;
   }
 }
+
+/* ========================================
+   FEATURED / MARKETPLACE
+======================================== */
+
 .sh-featured {
   padding: 110px 0;
   background: var(--sh-body);
@@ -1172,7 +1157,7 @@ body {
 }
 
 /* ========================================
-   HEADER
+   MAIN HEADER
 ======================================== */
 
 .sh-featured-header {
@@ -1181,7 +1166,7 @@ body {
   justify-content: space-between;
 
   gap: 30px;
-  margin-bottom: 42px;
+  margin-bottom: 48px;
 }
 
 .sh-featured-heading {
@@ -1218,12 +1203,13 @@ body {
 }
 
 /* ========================================
-   VIEW ALL
+   MAIN VIEW ALL
 ======================================== */
 
 .sh-view-all {
   display: inline-flex;
   align-items: center;
+
   gap: 7px;
 
   flex-shrink: 0;
@@ -1248,20 +1234,119 @@ body {
 }
 
 /* ========================================
-   GRID
+   CATEGORY ROWS
 ======================================== */
 
-.sh-listings-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+.sh-category-rows {
+  display: flex;
+  flex-direction: column;
+
+  gap: 62px;
 }
 
 /* ========================================
-   CARD
+   CATEGORY ROW
+======================================== */
+
+.sh-category-row {
+  min-width: 0;
+}
+
+/* ========================================
+   CATEGORY HEADER
+======================================== */
+
+.sh-category-row-header {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 19px;
+}
+
+.sh-category-row-title {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.sh-category-row-title h3 {
+  margin: 0;
+
+  color: var(--sh-primary);
+
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+}
+
+/* ========================================
+   HORIZONTAL SCROLL
+======================================== */
+
+.sh-category-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 3px 2px 18px;
+
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: rgba(49, 55, 43, 0.18) transparent;
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+.sh-category-scroll::-webkit-scrollbar {
+  height: 5px;
+}
+
+.sh-category-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sh-category-scroll::-webkit-scrollbar-thumb {
+  background: rgba(49, 55, 43, 0.16);
+
+  border-radius: 999px;
+}
+
+.sh-category-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(49, 55, 43, 0.28);
+}
+
+/* ========================================
+   CATEGORY TRACK
+======================================== */
+
+.sh-category-track {
+  display: flex;
+  align-items: stretch;
+
+  gap: 20px;
+
+  width: max-content;
+
+  padding-right: 2px;
+}
+
+/* ========================================
+   LISTING CARD
 ======================================== */
 
 .sh-listing-card {
+  flex: 0 0 282px;
+
   overflow: hidden;
 
   background: var(--sh-surface);
@@ -1279,13 +1364,18 @@ body {
 }
 
 /* ========================================
-   IMAGE
+   IMAGE LINK
 ======================================== */
 
 .sh-listing-image-link {
   display: block;
+
   text-decoration: none;
 }
+
+/* ========================================
+   IMAGE
+======================================== */
 
 .sh-listing-image-wrap {
   position: relative;
@@ -1313,17 +1403,44 @@ body {
 }
 
 /* ========================================
-   CATEGORY
+   NO IMAGE
+======================================== */
+
+.sh-listing-no-image {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(49, 55, 43, 0.3);
+
+  background: linear-gradient(
+    135deg,
+    rgba(49, 55, 43, 0.04),
+    rgba(176, 122, 74, 0.07)
+  );
+}
+
+/* ========================================
+   CATEGORY BADGE
 ======================================== */
 
 .sh-listing-category {
   position: absolute;
+
   top: 13px;
   left: 13px;
+
+  max-width: calc(100% - 65px);
+
+  overflow: hidden;
 
   padding: 6px 10px;
 
   color: var(--sh-primary);
+
   background: rgba(250, 247, 238, 0.92);
 
   border-radius: 7px;
@@ -1331,15 +1448,20 @@ body {
   font-size: 10px;
   font-weight: 700;
 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ========================================
-   SAVE
+   SAVE BUTTON
 ======================================== */
 
 .sh-save-listing {
   position: absolute;
+
   top: 12px;
   right: 12px;
 
@@ -1351,6 +1473,7 @@ body {
   justify-content: center;
 
   color: var(--sh-primary);
+
   background: rgba(255, 255, 255, 0.92);
 
   border: none;
@@ -1359,27 +1482,36 @@ body {
   cursor: pointer;
 
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
 
 .sh-save-listing:hover {
   color: var(--sh-accent);
+
   transform: scale(1.07);
 }
 
 /* ========================================
-   CONTENT
+   CARD CONTENT
 ======================================== */
 
 .sh-listing-content {
   padding: 18px 18px 19px;
 }
 
+/* ========================================
+   TITLE
+======================================== */
+
 .sh-listing-title-row {
   display: flex;
   align-items: center;
+
   gap: 7px;
+
+  min-width: 0;
 }
 
 .sh-listing-title-row h3 {
@@ -1400,10 +1532,22 @@ body {
 
 .sh-verified-icon {
   flex-shrink: 0;
+
   color: var(--sh-secondary);
 }
 
+/* ========================================
+   PRICE
+======================================== */
+
 .sh-listing-price {
+  display: flex;
+  align-items: baseline;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
   margin: 8px 0 16px;
 
   color: var(--sh-primary);
@@ -1411,6 +1555,26 @@ body {
   font-size: 16px;
   font-weight: 700;
 }
+
+.sh-price-prefix {
+  color: var(--sh-text-muted);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sh-price-type {
+  margin-left: 2px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* ========================================
+   META
+======================================== */
 
 .sh-listing-meta {
   display: flex;
@@ -1429,12 +1593,26 @@ body {
 }
 
 .sh-listing-meta > span:first-child {
+  min-width: 0;
+
   display: flex;
   align-items: center;
+
   gap: 4px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sh-listing-meta > span:first-child svg {
+  flex-shrink: 0;
 }
 
 .sh-listing-seller {
+  max-width: 42%;
+
   overflow: hidden;
 
   white-space: nowrap;
@@ -1443,13 +1621,194 @@ body {
   text-align: right;
 }
 
+/* ========================================= VIEW ALL CARD ========================================= */
+.sh-category-view-card {
+  position: relative;
+  flex: 0 0 282px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #ffffff;
+  background: var(--sh-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  text-decoration: none;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease, background 0.3s ease;
+}
+/* .sh-category-view-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 75% 25%,
+    rgba(176, 122, 74, 0.22),
+    transparent 42%
+  );
+  opacity: 0.8;
+} */
+.sh-category-view-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(176, 122, 74, 0.4);
+  background: #394032;
+}
+.sh-category-view-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 25px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+.sh-category-view-card:hover .sh-category-view-card-inner {
+  gap: 13px;
+  color: #d8b28f;
+}
+.sh-category-view-card-inner svg {
+  flex-shrink: 0;
+}
+
+/* ========================================
+   LOADING
+======================================== */
+
+.sh-featured-loading {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: var(--sh-text-muted);
+
+  font-size: 13px;
+}
+
+.sh-featured-spinner {
+  color: var(--sh-accent);
+
+  animation: shFeaturedSpin 0.9s linear infinite;
+}
+
+@keyframes shFeaturedSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   ERROR
+======================================== */
+
+.sh-featured-error {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: var(--sh-text-muted);
+
+  text-align: center;
+}
+
+.sh-featured-error svg {
+  color: var(--sh-accent);
+}
+
+.sh-featured-error p {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+/* ========================================
+   EMPTY
+======================================== */
+
+.sh-featured-empty {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  text-align: center;
+}
+
+.sh-featured-empty-icon {
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 17px;
+
+  color: var(--sh-primary);
+
+  background: rgba(49, 55, 43, 0.06);
+
+  border-radius: 15px;
+}
+
+.sh-featured-empty h3 {
+  margin: 0 0 7px;
+
+  color: var(--sh-primary);
+
+  font-size: 18px;
+}
+
+.sh-featured-empty p {
+  max-width: 360px;
+
+  margin: 0;
+
+  color: var(--sh-text-muted);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 /* ========================================
    TABLET
 ======================================== */
 
 @media (max-width: 950px) {
-  .sh-listings-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .sh-featured {
+    padding: 95px 0;
+  }
+
+  .sh-category-rows {
+    gap: 54px;
+  }
+
+  .sh-category-track {
+    gap: 18px;
+  }
+
+  .sh-listing-card,
+  .sh-category-view-card {
+    flex-basis: 275px;
   }
 
   .sh-listing-image-wrap {
@@ -1473,22 +1832,61 @@ body {
   .sh-featured-header {
     align-items: flex-start;
     flex-direction: column;
+
     gap: 22px;
 
-    margin-bottom: 30px;
+    margin-bottom: 38px;
   }
 
   .sh-featured-heading h2 {
     font-size: 43px;
   }
 
-  .sh-listings-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .sh-category-rows {
+    gap: 46px;
+  }
+
+  .sh-category-row-header {
+    margin-bottom: 16px;
+  }
+
+  .sh-category-row-title h3 {
+    font-size: 19px;
+  }
+
+  .sh-category-scroll {
+    /*
+      Lets the final View All card have
+      comfortable breathing room on mobile.
+    */
+
+    margin-right: -15px;
+
+    padding-left: 1px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
+
+  .sh-category-track {
+    gap: 14px;
+  }
+
+  .sh-listing-card,
+  .sh-category-view-card {
+    /*
+      Slightly wider than a typical mobile
+      half-column so the next card remains
+      partially visible.
+    */
+    flex-basis: 275px;
   }
 
   .sh-listing-image-wrap {
-    height: 260px;
+    height: 250px;
+  }
+
+  .sh-listing-content {
+    padding: 17px 17px 18px;
   }
 }
 
@@ -1501,10 +1899,42 @@ body {
     font-size: 38px;
   }
 
+  .sh-category-row-title h3 {
+    font-size: 18px;
+  }
+
+  .sh-category-track {
+    gap: 13px;
+  }
+
+  .sh-listing-card,
+  .sh-category-view-card {
+    flex-basis: 260px;
+  }
+
   .sh-listing-image-wrap {
     height: 235px;
   }
+
+  .sh-listing-content {
+    padding: 16px;
+  }
+
+  .sh-listing-title-row h3 {
+    font-size: 14px;
+  }
+
+  .sh-listing-price {
+    font-size: 15px;
+  }
+
+  .sh-category-view-card-inner {
+    padding: 20px;
+
+    font-size: 13px;
+  }
 }
+
 .sh-categories {
   padding: 110px 0;
 
