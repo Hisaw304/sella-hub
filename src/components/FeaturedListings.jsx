@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 import {
   ArrowUpRight,
   Heart,
@@ -7,9 +9,14 @@ import {
   BadgeCheck,
   LoaderCircle,
   Package,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 const FeaturedListings = () => {
   const [listings, setListings] = useState([]);
@@ -23,25 +30,24 @@ const FeaturedListings = () => {
         setError("");
 
         /*
-      ========================================
-      GET PUBLISHED LISTINGS
-      ========================================
-      */
+        ========================================
+        GET PUBLISHED LISTINGS
+        ========================================
+        */
 
         const { data: listingData, error: listingError } = await supabase
           .from("listings")
           .select(
             `
-          *,
-          categories (
-            id,
-            name
-          )
-        `
+              *,
+              categories (
+                id,
+                name
+              )
+            `
           )
           .eq("status", "published")
-          .order("created_at", { ascending: false })
-          .limit(20);
+          .order("created_at", { ascending: false });
 
         if (listingError) {
           throw listingError;
@@ -53,10 +59,10 @@ const FeaturedListings = () => {
         }
 
         /*
-      ========================================
-      GET SELLERS
-      ========================================
-      */
+        ========================================
+        GET SELLER IDS
+        ========================================
+        */
 
         const userIds = [
           ...new Set(
@@ -65,10 +71,10 @@ const FeaturedListings = () => {
         ];
 
         /*
-      ========================================
-      GET ACTIVE PLANS
-      ========================================
-      */
+        ========================================
+        GET ACTIVE PLANS
+        ========================================
+        */
 
         let activePlans = [];
 
@@ -77,10 +83,17 @@ const FeaturedListings = () => {
             .from("user_plans")
             .select(
               `
-            user_id,
-            status,
-            expired_at
-          `
+                user_id,
+                status,
+                expired_at,
+                plan_id,
+                pricing_plans (
+                  id,
+                  name,
+                  slug,
+                  featured_homepage
+                )
+              `
             )
             .in("user_id", userIds)
             .eq("status", "active")
@@ -94,42 +107,66 @@ const FeaturedListings = () => {
         }
 
         /*
-      ========================================
-      ONLY KEEP LISTINGS FROM USERS
-      WITH ACTIVE SUBSCRIPTIONS
-      ========================================
-      */
+        ========================================
+        SELLERS ELIGIBLE FOR HOMEPAGE FEATURE
+        ========================================
+        */
 
-        const activeUserIds = new Set(activePlans.map((plan) => plan.user_id));
-
-        const activeListings = listingData.filter((listing) =>
-          activeUserIds.has(listing.user_id)
+        const featuredSellerIds = new Set(
+          activePlans
+            .filter((plan) => plan.pricing_plans?.featured_homepage === true)
+            .map((plan) => plan.user_id)
         );
 
-        if (activeListings.length === 0) {
+        /*
+        ========================================
+        ONE LISTING PER PREMIUM SELLER
+        ========================================
+
+        Listings are already ordered newest first,
+        so the first listing we encounter for each
+        seller becomes their featured listing.
+        ========================================
+        */
+
+        const sellerMap = new Map();
+
+        for (const listing of listingData) {
+          if (!featuredSellerIds.has(listing.user_id)) {
+            continue;
+          }
+
+          if (!sellerMap.has(listing.user_id)) {
+            sellerMap.set(listing.user_id, listing);
+          }
+        }
+
+        const featuredListings = Array.from(sellerMap.values());
+
+        if (featuredListings.length === 0) {
           setListings([]);
           return;
         }
 
         /*
-      ========================================
-      GET SELLER PROFILES
-      ========================================
-      */
+        ========================================
+        GET SELLER PROFILES
+        ========================================
+        */
 
-        const activeSellerIds = [
+        const sellerIds = [
           ...new Set(
-            activeListings.map((listing) => listing.user_id).filter(Boolean)
+            featuredListings.map((listing) => listing.user_id).filter(Boolean)
           ),
         ];
 
         let profiles = [];
 
-        if (activeSellerIds.length > 0) {
+        if (sellerIds.length > 0) {
           const { data: profileData, error: profileError } = await supabase
             .from("profiles")
             .select("id, full_name, avatar_url, role")
-            .in("id", activeSellerIds);
+            .in("id", sellerIds);
 
           if (profileError) {
             console.warn("Profiles loading error:", profileError);
@@ -139,27 +176,21 @@ const FeaturedListings = () => {
         }
 
         /*
-      ========================================
-      ATTACH SELLER PROFILE
-      ========================================
-      */
+        ========================================
+        ATTACH SELLER PROFILE
+        ========================================
+        */
 
-        const listingsWithProfiles = activeListings.map((listing) => ({
+        const listingsWithProfiles = featuredListings.map((listing) => ({
           ...listing,
-
           profiles:
             profiles.find((profile) => profile.id === listing.user_id) || null,
         }));
 
-        /*
-      ========================================
-      SHOW ONLY 6 FEATURED LISTINGS
-      ========================================
-      */
-
-        setListings(listingsWithProfiles.slice(0, 6));
+        setListings(listingsWithProfiles);
       } catch (err) {
         console.error("Featured listings error:", err);
+
         setError("Unable to load featured listings.");
       } finally {
         setLoading(false);
@@ -191,23 +222,30 @@ const FeaturedListings = () => {
 
   if (loading) {
     return (
-      <section className="sh-featured">
-        <div className="sh-featured-container">
-          <div className="sh-featured-header">
-            <div className="sh-featured-heading">
-              <span className="sh-section-label">Explore the marketplace</span>
+      <section className="sh-premium-featured">
+        <div className="sh-premium-featured-container">
+          <div className="sh-premium-featured-header">
+            <div className="sh-premium-featured-heading">
+              <span className="sh-section-label">Premium sellers</span>
 
               <h2>
-                Find something
-                <span> worth discovering.</span>
+                Discover what’s
+                <span> worth a closer look.</span>
               </h2>
+            </div>
+
+            <div className="sh-premium-featured-actions">
+              <Link to="/browse" className="sh-view-all">
+                View all listings
+                <ArrowUpRight size={17} />
+              </Link>
             </div>
           </div>
 
-          <div className="sh-featured-loading">
-            <LoaderCircle size={25} className="sh-featured-spinner" />
+          <div className="sh-premium-featured-loading">
+            <LoaderCircle size={25} className="sh-premium-featured-spinner" />
 
-            <span>Loading listings...</span>
+            <span>Loading featured listings...</span>
           </div>
         </div>
       </section>
@@ -222,11 +260,10 @@ const FeaturedListings = () => {
 
   if (error) {
     return (
-      <section className="sh-featured">
-        <div className="sh-featured-container">
-          <div className="sh-featured-error">
+      <section className="sh-premium-featured">
+        <div className="sh-premium-featured-container">
+          <div className="sh-premium-featured-error">
             <Package size={22} />
-
             <p>{error}</p>
           </div>
         </div>
@@ -236,45 +273,99 @@ const FeaturedListings = () => {
 
   /*
   ========================================
+  EMPTY
+  ========================================
+  */
+
+  if (listings.length === 0) {
+    return null;
+  }
+
+  /*
+  ========================================
   CONTENT
   ========================================
   */
 
   return (
-    <section className="sh-featured">
-      <div className="sh-featured-container">
+    <section className="sh-premium-featured">
+      <div className="sh-premium-featured-container">
         {/* HEADER */}
-
-        <div className="sh-featured-header">
-          <div className="sh-featured-heading">
-            <span className="sh-section-label">Explore the marketplace</span>
+        <div className="sh-premium-featured-header">
+          <div className="sh-premium-featured-heading">
+            <span className="sh-section-label">Featured sellers</span>
 
             <h2>
-              Find something
-              <span> worth discovering.</span>
+              Discover what’s
+              <span> worth a closer look.</span>
             </h2>
           </div>
 
-          <Link to="/browse" className="sh-view-all">
-            View all listings
-            <ArrowUpRight size={17} />
-          </Link>
+          {/* VIEW ALL ONLY */}
+          <div className="sh-premium-featured-actions">
+            <Link to="/browse" className="sh-view-all">
+              View all listings
+              <ArrowUpRight size={17} />
+            </Link>
+          </div>
         </div>
 
-        {/* EMPTY */}
+        {/* SLIDER */}
+        {/* SLIDER */}
+        <div className="sh-premium-featured-slider">
+          {/* NAVIGATION — SITS OVER THE CARDS */}
+          <button
+            type="button"
+            className="sh-premium-featured-nav sh-premium-featured-prev"
+            aria-label="Previous featured listings"
+          >
+            <ChevronLeft size={18} />
+          </button>
 
-        {listings.length === 0 ? (
-          <div className="sh-featured-empty">
-            <div className="sh-featured-empty-icon">
-              <Package size={23} />
-            </div>
+          <button
+            type="button"
+            className="sh-premium-featured-nav sh-premium-featured-next"
+            aria-label="Next featured listings"
+          >
+            <ChevronRight size={18} />
+          </button>
 
-            <h3>No listings yet</h3>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            navigation={{
+              prevEl: ".sh-premium-featured-prev",
+              nextEl: ".sh-premium-featured-next",
+            }}
+            loop={listings.length > 1}
+            spaceBetween={22}
+            slidesPerView={1.15}
+            speed={750}
+            autoplay={
+              listings.length > 1
+                ? {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+                : false
+            }
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 18,
+              },
 
-            <p>New products and services from sellers will appear here.</p>
-          </div>
-        ) : (
-          <div className="sh-listings-grid">
+              900: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+
+              1200: {
+                slidesPerView: 4,
+                spaceBetween: 22,
+              },
+            }}
+          >
             {listings.map((listing) => {
               const category = listing.categories?.name || "Marketplace";
 
@@ -282,29 +373,20 @@ const FeaturedListings = () => {
 
               const verified = Boolean(listing.verified);
 
-              /*
-              ========================================
-              IMAGE
-              ========================================
-
-              Your listings table does not contain an image
-              column, so don't try to read listing.image_url.
-              Images should come from listing_images.
-              */
-
               return (
-                <ListingCard
-                  key={listing.id}
-                  listing={listing}
-                  category={category}
-                  seller={seller}
-                  verified={verified}
-                  formatPrice={formatPrice}
-                />
+                <SwiperSlide key={listing.id}>
+                  <PremiumFeaturedCard
+                    listing={listing}
+                    category={category}
+                    seller={seller}
+                    verified={verified}
+                    formatPrice={formatPrice}
+                  />
+                </SwiperSlide>
               );
             })}
-          </div>
-        )}
+          </Swiper>
+        </div>
       </div>
     </section>
   );
@@ -312,11 +394,17 @@ const FeaturedListings = () => {
 
 /*
 ==================================================
-LISTING CARD
+PREMIUM FEATURED CARD
 ==================================================
 */
 
-const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
+const PremiumFeaturedCard = ({
+  listing,
+  category,
+  seller,
+  verified,
+  formatPrice,
+}) => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -325,7 +413,9 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
         .from("listing_images")
         .select("*")
         .eq("listing_id", listing.id)
-        .order("created_at", { ascending: true })
+        .order("created_at", {
+          ascending: true,
+        })
         .limit(1)
         .maybeSingle();
 
@@ -338,24 +428,31 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
   }, [listing.id]);
 
   return (
-    <article className="sh-listing-card">
+    <article className="sh-premium-featured-card">
       {/* IMAGE */}
 
-      <Link to={`/listing/${listing.slug}`} className="sh-listing-image-link">
-        <div className="sh-listing-image-wrap">
+      <Link
+        to={`/listing/${listing.slug}`}
+        className="sh-premium-featured-image-link"
+      >
+        <div className="sh-premium-featured-image-wrap">
           {image ? (
-            <img src={image} alt={listing.title} className="sh-listing-image" />
+            <img
+              src={image}
+              alt={listing.title}
+              className="sh-premium-featured-image"
+            />
           ) : (
-            <div className="sh-listing-no-image">
+            <div className="sh-premium-featured-no-image">
               <Package size={30} />
             </div>
           )}
 
-          <span className="sh-listing-category">{category}</span>
+          <span className="sh-premium-featured-category">{category}</span>
 
           <button
             type="button"
-            className="sh-save-listing"
+            className="sh-premium-featured-save"
             aria-label={`Save ${listing.title}`}
             onClick={(event) => {
               event.preventDefault();
@@ -369,23 +466,26 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
 
       {/* CONTENT */}
 
-      <div className="sh-listing-content">
-        <div className="sh-listing-title-row">
+      <div className="sh-premium-featured-content">
+        <div className="sh-premium-featured-title-row">
           <h3>{listing.title}</h3>
 
-          {verified && <BadgeCheck className="sh-verified-icon" size={17} />}
+          {verified && (
+            <BadgeCheck className="sh-premium-featured-verified" size={17} />
+          )}
         </div>
 
-        <div className="sh-listing-price">
+        <div className="sh-premium-featured-price">
           {listing.price_type === "starting_from" ? (
             <>
-              <span className="sh-price-prefix">From</span>{" "}
+              <span className="sh-premium-featured-price-prefix">From</span>{" "}
               {formatPrice(listing)}
             </>
           ) : listing.price_type === "negotiable" ? (
             <>
               {formatPrice(listing)}
-              <span className="sh-price-type">Negotiable</span>
+
+              <span className="sh-premium-featured-price-type">Negotiable</span>
             </>
           ) : listing.price_type === "free" ? (
             "Free"
@@ -396,13 +496,14 @@ const ListingCard = ({ listing, category, seller, verified, formatPrice }) => {
           )}
         </div>
 
-        <div className="sh-listing-meta">
+        <div className="sh-premium-featured-meta">
           <span>
             <MapPin size={14} />
+
             {listing.location || "Location not specified"}
           </span>
 
-          <span className="sh-listing-seller">{seller}</span>
+          <span className="sh-premium-featured-seller">{seller}</span>
         </div>
       </div>
     </article>

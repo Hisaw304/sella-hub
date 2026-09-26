@@ -1,6 +1,6 @@
 import { ArrowRight, Search, ShieldCheck, Store } from "lucide-react";
 
-import heroImage from "../assets/herosh.jpg";
+import heroImage from "../assets/hero.jpg";
 
 const Hero = () => {
   return (

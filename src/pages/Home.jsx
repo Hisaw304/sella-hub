@@ -7,13 +7,15 @@ import WhySell from "../components/WhySell";
 import PricingPlans from "../components/PricingPlans";
 import FooterCTA from "../components/FooterCTA";
 import SellaHubExperience from "../components/SellaHubExperience";
+import Listings from "../components/Listings";
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <FeaturedListings />
       <Categories />
+      <FeaturedListings />
+      <Listings />
       <SellaHubExperience />
       <HowItWorks />
       <WhySell />

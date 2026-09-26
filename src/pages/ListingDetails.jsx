@@ -350,7 +350,36 @@ const ListingDetails = () => {
       }
     }
   };
+  const handleSubmitReport = async () => {
+    if (!reportReason || !listing?.id) return;
 
+    try {
+      const { error } = await supabase.from("listing_reports").insert({
+        listing_id: listing.id,
+        reason: reportReason,
+        description: reportDescription.trim() || null,
+        reporter_email: reportEmail.trim() || null,
+        reporter_name: null,
+        status: "pending",
+      });
+
+      if (error) {
+        console.error("Report submission error:", error);
+        alert("We couldn't submit your report. Please try again.");
+        return;
+      }
+
+      alert("Thank you. Your report has been submitted for review.");
+
+      setReportReason("");
+      setReportDescription("");
+      setReportEmail("");
+      setShowReportModal(false);
+    } catch (error) {
+      console.error("Unexpected report error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
   /*
   ========================================
   CONTACT SELLER
@@ -953,11 +982,11 @@ const ListingDetails = () => {
                     >
                       Cancel
                     </button>
-
                     <button
                       type="button"
                       className="sh-report-submit"
                       disabled={!reportReason}
+                      onClick={handleSubmitReport}
                     >
                       <Flag size={15} />
                       Submit report

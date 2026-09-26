@@ -112,10 +112,10 @@ export default function Categories() {
             </p>
           </div>
 
-          <Link to="/browse" className="sh-categories-view-all">
+          {/* <Link to="/browse" className="sh-categories-view-all">
             View all listings
             <ArrowRight size={16} />
-          </Link>
+          </Link> */}
         </div>
 
         {/* CATEGORIES */}
