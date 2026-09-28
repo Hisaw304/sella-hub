@@ -85,7 +85,7 @@ export default function Categories() {
       <section className="sh-home-categories">
         <div className="sh-home-categories-container">
           <div className="sh-home-section-heading">
-            <span>Explore marketplace</span>
+            <span>Explore categories</span>
             <h2>Find what you're looking for.</h2>
           </div>
 
@@ -118,7 +118,7 @@ export default function Categories() {
 
         <div className="sh-home-section-heading">
           <div>
-            <span>Explore marketplace</span>
+            <span>Explore categories</span>
 
             <h2>
               Find what

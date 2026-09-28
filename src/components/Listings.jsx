@@ -301,11 +301,6 @@ const Listings = () => {
                     ======================================== */}
 
                     {category.listings.map((listing) => {
-                      const listingCategory =
-                        listing.categories?.name ||
-                        category.name ||
-                        "Marketplace";
-
                       const seller =
                         listing.profiles?.full_name || "SellaHub seller";
 
@@ -315,7 +310,6 @@ const Listings = () => {
                         <ListingCard
                           key={listing.id}
                           listing={listing}
-                          category={listingCategory}
                           seller={seller}
                           verified={verified}
                           formatPrice={formatPrice}
